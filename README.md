@@ -8,8 +8,11 @@
 Articles are sourced from aldaily.com, as recommended by Erica L. Meltzer
 ## How Does it Work?
 In her popular prep book "The complete guide for SAT reading" Erica Meltzer advises those who want to improve their score to read from [aldaily.com](https://www.aldaily.com/), a website that links to more than 17,000 articles, book reviews, and essays. most of which are written by credible Journalists & Academic researchers. The same group that the test writers base their passages on.
-&nbsp;This tool builds on aldaily impressive collection of quality articles by formating them into SAT passages.
-*Note Toth doesn't provide questions, only the articles* 
+&nbsp;
+
+This tool builds on aldaily impressive collection of quality articles by formating them into SAT passages.
+
+*Note: Toth doesn't provide questions, only the passages* 
 ## Installation
 To get this running on your local machine:
 &nbsp;
