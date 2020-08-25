@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head>
+
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<meta charset="UTF-8">
+	<meta name ="viewport" content= "width=device-width,  initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="manifest" href="images/site.webmanifest">
+	<title>Toth - Read SAT passages</title>
+</head>
+
+
+<body data-barba="wrapper">
+
+<nav>
+	<div class="logo"><a href= "/"> TOTH</a></div>
+	<ul class = "nav-links">
+		<li><a href="#">Sources</a></li>
+		<li><a href="#" onclick= "document.documentElement.style.cssText = '--blue:' + '#'+Math.floor(Math.random()*16777215).toString(16)">Theme</a></li>
+		<li><a href="#">About</a></li>
+	</ul>
+
+	<svg version="1.1" class="background-pattern" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;" xml:space="preserve">
+		<g>
+			<path d="M82.8,234.8h42v-91.4c-23.3,1.1-42,18.1-42,47.2V234.8z"/>
+			<path d="M183.6,106c0,13.9-5.4,27.1-15.3,36.9c-7.1,7.1-11,16.5-11,26.5v43.3h92.4V96.2c0-36.9-29.5-67.1-66.1-68.2V106z"/>
+			<path d="M77.1,50C35.6,56.2,3.7,92,3.7,135.2h14.8c0-22,17.9-39.9,39.9-39.9h18.7C77.1,95.3,77.1,50,77.1,50z"/>
+			<rect x="99.2" y="50" width="46.4" height="46.4"/>
+		</g>
+	</svg>
+	<svg version="1.1" class="background-pattern" id= "layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	viewBox="0 0 256 256" style="enable-background:new 0 0 256 256;" xml:space="preserve">
+		<g>
+			<path d="M82.8,234.8h42v-91.4c-23.3,1.1-42,18.1-42,47.2V234.8z"/>
+			<path d="M183.6,106c0,13.9-5.4,27.1-15.3,36.9c-7.1,7.1-11,16.5-11,26.5v43.3h92.4V96.2c0-36.9-29.5-67.1-66.1-68.2V106z"/>
+			<path d="M77.1,50C35.6,56.2,3.7,92,3.7,135.2h14.8c0-22,17.9-39.9,39.9-39.9h18.7C77.1,95.3,77.1,50,77.1,50z"/>
+			<rect x="99.2" y="50" width="46.4" height="46.4"/>
+		</g>
+	</svg>
+</nav>	
+
+
+
+<main data-barba="container" id="app">
+	<div class="container">
+	
+
+	<% if (!locals.article) { %>	
+		<div id="get-article" method = "get" action= "/next-article">
+			<a id = "fetch"class = "link"> Start</a>
+			<h3>Click the Start button above to view an SAT level passage! <br>Have fun while reading</br></h3>
+		</div>	
+	<% } %>		
+	
+		<header id = "banner">
+			<h1>1<h1>
+			<h1>1</h1>
+		</header>
+		
+			
+		<div class="description-top">
+			<h1> Reading Test</h1>
+			<h2>65 MINUTES, 52 QUESTIONS</h2>
+			<h3>Turn to Section 1 of your answer sheet to answer the questions in this section.</h3>
+		</div>
+			
+			
+		<div class="description-bottom">
+			<h3> DIRECTIONS </h3>
+			<h4>Each passage or pair of passages below is followed by a number of questions. After reading 
+			each passage or pair, choose the best answer to each question based on what is stated or 
+			implied in the passage or passages and in any accompanying graphics (such as a table or graph).</h4>
+		</div>
+		
+		
+
+
+
+	<% if (locals.article) { %>
+		
+		<% var mid = article.substring(parseInt(article.length/2)).indexOf(" ")+parseInt(article.length/2) %>
+		<% var choices = [1,10,11,21,22,31,32,41,42,52]; 
+		let i = 2*parseInt(Math.random()*choices.length/2) %>	
+		<article>
+
+		<section>
+			<div class = "line-num"></div>
+			<div class="article-main" > 
+				<p class= "instructions">Questions <%- choices[i]+ "-" + choices[i+1] %> are based on the following passage.</p>
+				
+				<p class= "article-intro">This passage is from <a class= "link" target = "_blank" rel="noopener" href = "<%- link %>"><%-link.host%>;</a> <%-discrp%> Fetched from adaily.com, on <%-date%></p>
+				
+				<%- article.substring(0,mid) %>
+			</div>
+		</section>
+
+			<div class="separateur"></div>
+
+		<section>
+			<div class = "line-num"></div>
+			<div class="article-main"><%-article.substring(mid) %></div>
+		</section>
+
+		</article>
+	
+		<div class="pagination">
+			<div id="get-article">
+				<a id = "back" class = "link"> Back</a>
+				<h3> Go back to the previous passage</h3>
+			</div>	
+			<div id="get-article">
+				<a id = "next" class = "link"> Next</a>
+				<h3>View another reading passage</h3>
+			</div>	
+		</div>
+
+	<% } %>	
+	
+	</div>
+	
+
+
+
+</main>
+
+
+
+
+
+
+<footer>
+	<script src="https://unpkg.com/@barba/core"></script>
+	<script src ="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
+	<script  src= "javascripts/main.js"></script>	
+</footer>
+</body>
+</html>
