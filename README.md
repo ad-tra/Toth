@@ -27,7 +27,7 @@ To get this running on your local machine:
 	``$ npm start``
 
 &nbsp;
-Finally, Visit the website at [http://localhost:3000/](http://localhost:3000/)#
+Finally, Visit the website at [http://localhost:3000/](http://localhost:3000/)
 
 ## Built With
 Node, Express, and EJS
@@ -35,6 +35,6 @@ Node, Express, and EJS
 * [Express](https://www.express.com/)
 * [EJS](https://ejs.co/)
 ## 
-this project was created for personal use, but I'm delighted to help others achieve their desired score. Still, the app is very *beta* and unfinished. If you found any **bugs** or **issues** or you would like to help with development feel free to contact me 
+this project was created for personal use, but I'm delighted to help others achieve their desired score. Still, the app is very *beta* and unfinished. If you found any **bugs**, **issues** or you would like to help with development feel free to contact me 
 
 
