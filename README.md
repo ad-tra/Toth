@@ -36,6 +36,7 @@ Node, Express, and EJS
 * [Node.js](https://nodejs.org/en/)
 * [Express](https://www.express.com/)
 * [EJS](https://ejs.co/)
+* [Puppeteer](https://github.com/puppeteer/puppeteer)
 ## 
 this project was created for personal use, but I'm delighted to help others achieve their desired score. Still, the app is very *beta* and unfinished. If you found any **bugs**, **issues** or you would like to help with development feel free to contact me 
 
