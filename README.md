@@ -24,7 +24,7 @@ To get this running on your local machine:
 3. Install dependencies:
 &nbsp;
 `` $ npm install ``
-4. Finaly start the app
+4. Start the app
 	&nbsp;
 	``$ npm start``
 
