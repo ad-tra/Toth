@@ -244,6 +244,17 @@ main{
 	font-size: 0.7em;
     margin: 0 10px;
 	}
+	.loader h1{
+		white-space: normal;
+		font-size: 0.5em;
+	}
+	.loader {
+		flex-flow: column-reverse;
+
+	}
+	.loadTime{
+		font-size:0.5em;
+	}
 }
 
 .transition-fade {
@@ -431,4 +442,59 @@ font-family: 'doris-pp';
 }
 .pagination h3{
 	margin-top: 0.5em !important;
+}
+.loader-container{
+	display: none;
+}
+.loader{
+	display: flex;
+	font-family: 'rokkitt-bold';
+	justify-content: center;
+	align-items: center;
+	font-size: 3em;
+	margin-top: 30%
+}
+.loader h1{
+	text-align: center;
+	white-space: nowrap;
+}
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 58px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: var(--blue);
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+.loadTime{
+	text-align: center;
+	font-family: 'rokkitt-bold';
 }

@@ -42,13 +42,16 @@ router.get('/app',  function(req, res, next) {
   })
 
 router.get("/get-article", async(req, res) =>{
-  var linkNum = req.query.index || 0
+  var linkNum = req.query.load || 0
+
   try{ 
   var docs = await scrape(linkNum, "https://www.aldaily.com/essays-and-opinions/")
   res.render("app", {article: docs.content,link: new URL(docs.link),date: docs.date,discrp: docs.discrp})
+
 }
 catch{
-  res.send("error")
+  var linkNum = req.query.load+1
+  res.render("app", {article: docs.content,link: new URL(docs.link),date: docs.date,discrp: docs.discrp})
 }
 })
 

@@ -1,15 +1,3 @@
-function delay(n) {
-    n = n || 2000;
-    return new Promise((done) => {
-        setTimeout(() => {
-            done();
-        }, n);
-    });
-}
-async function wait(i, j){
-	await new Promise(r => setTimeout(r, i));
-	console.log(j)
-}
 const tl = gsap.timeline()
 function indexIntro(){
 tl
@@ -69,19 +57,15 @@ tl
 
 }
 
-//plays intro animation for the index page
-//if(window.location.pathname == "/")
-
-//passed to the scrpae(index, url)
-var linkIndex = 0
 
 
 
 if(window.location.pathname == "/"){
 	indexIntro()
-}
 
-if(window.location.search.includes("?index") && !window.location.search.includes("?index=-1") )
+
+}
+else
 {
 	var len1 = document.querySelectorAll(".article-main")[0].offsetHeight;
 	var len2 = document.querySelectorAll(".article-main")[1].offsetHeight;
@@ -99,16 +83,32 @@ document.querySelector(".line-num p").style.paddingTop = document.querySelector(
 document.getElementById("next").addEventListener("click", () => {
 	//if index is less than 20
 	var fullQuery = window.location.search
-	var query = parseInt(fullQuery.split("=")[1])
-	if(query<19){ 
+	var query = fullQuery.split("=")[0]
+	var queryValue = parseInt(fullQuery.split("=")[1])
+	var newQuery = queryValue + 1
+	
+	if(queryValue<19 && query == "?index"){ 
 
-		var newQuery = query + 1
 		window.location.href = `?index=${newQuery}`;
 	}	
-	else{
+	
+	else{ 
+	if(queryValue == 19) {
+		var newQuery =0
+	}
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', `get-article?load=${newQuery}`)
 
-	window.location.href = `get-article?index=0`
-	linkIndex++;
+    if(xhr.readyState == 1){
+    	document.querySelector("main").style.display= "none"
+		document.querySelector(".loader-container").style.display= "inherit"
+    }
+    xhr.onerror = function(){
+    console.log('Request Error...');
+    }
+      
+    xhr.send();
+	window.location.href = `get-article?load=${newQuery}`
 	}
 
 
@@ -120,43 +120,7 @@ history.back()
 
 
 }
-if(!window.location.search.includes("?index") && window.location.pathname.includes("/app"))
-{
-document.getElementById("fetch").addEventListener("click", ()=>{
-	window.location.href = "app?index=0"})
 
-
-
-}
-
-
-/*barba.init({
-        transitions: [
-            {
-                async leave(data) {
-                    const done = this.async();
-                    //animation for the index outro 
-                    indexOutro()
-                    wait(100, 2);
-                    done();
-                },
-
-                async enter(data) {
-                     //animation for the app intro 
-                     document.getElementById("get-article").innerText = "hah"
-                     indexIntro()
-                     wait(100, 3);
-                },
-
-                async once(data) {
-                     //animation for the index intro 
-                     wait(100, 1);
-                     indexIntro()
-                },
-            },
-        ],
-});
-*/
 
 
 

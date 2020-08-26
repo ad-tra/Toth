@@ -3,7 +3,6 @@
 
 
 
-
 <head>
 
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
@@ -19,7 +18,6 @@
 
 
 <body data-barba="wrapper">
-
 <nav>
 	<div class="logo"><a href= "/"> TOTH</a></div>
 	<ul class = "nav-links">
@@ -48,9 +46,16 @@
 	</svg>
 </nav>	
 
+<section class="loader-container">
+	<div class="loader">
+		<h1>The passage is loading<h1>
+		<div class="lds-facebook"><div></div><div></div><div></div></div>
+	</div>
+	<h2 class="loadTime"> This takes about 5~10 seconds</h2>
+</section>
 
 
-<main data-barba="container" id="app">
+<main id = "page"data-barba="container" id="app">
 	<div class="container">
 	
 
@@ -138,7 +143,6 @@
 
 
 <footer>
-	<script src="https://unpkg.com/@barba/core"></script>
 	<script src ="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
 	<script  src= "javascripts/main.js"></script>	
 </footer>
