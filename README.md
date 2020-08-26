@@ -16,11 +16,15 @@ This tool builds on aldaily impressive collection of quality articles by formati
 ## Installation
 To get this running on your local machine:
 &nbsp;
+
 1. Install  [Node.js ](https://nodejs.org/en/), a JavaScript runtime 
 
 2. Clone the repo or Download it as ZiP
 &nbsp;
 `` $ git clone https://github.com/ad-tra/Toth.git`` 
+
+	If you have windows, you can skip steps 3 & 4 by opening ``instal.bat`` then ``run.bat``
+
 3. Install dependencies:
 &nbsp;
 `` $ npm install ``
