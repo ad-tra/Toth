@@ -1,4 +1,5 @@
 const tl = gsap.timeline()
+//intro animatino for the index page
 function indexIntro(){
 tl
 .from('.background-pattern', {
@@ -32,37 +33,46 @@ tl
 		ease: "power2",
 	}, "-=.9");
 }
-function indexOutro(){
-tl
-.add(function(){
-	//document.querySelector(".button").style.color = "var(--accent)"
-})
-.to(".button",{
-	position:"relative",
-	left: "0em",
-	ease: "circ",
-	duration:1
-})
 
-.to(".button-pattern", {
-	position:'absolute',
-	height: "62%",
-	ease: "circ",	
-	duration: 1
-})
-.to(".button-pattern", {
-	width:"100%",
 
-})
-
+if(document.body.className == "dark"){
+	document.querySelector(".switch input").checked = true;
 }
 
+var drkModeCheck = document.querySelector(".switch input")
+drkModeCheck.addEventListener("click", ()=>{
+	if(drkModeCheck.checked == true){
+		document.body.className = "dark"
+		localStorage.setItem("theme", "dark")
+	}
+	else{
+		document.body.className = "light"
+		localStorage.setItem("theme", "light")
+	}
+})
 
+
+var accentCheck = document.getElementById("feeling-lucky")
+accentCheck.addEventListener("click", () =>{
+	var colors = ["blue", "orange", "violet", "green"]
+	for(let i = 0; i<colors.length-1; i++)
+	{
+		if(document.body.id == colors[colors.length-1]){
+			document.body.id = colors[0]
+			localStorage.setItem("accent", colors[0])
+			break;
+		}
+		if(document.body.id == colors[i]){
+			document.body.id = colors[i+1]
+			localStorage.setItem("accent", colors[i+1])
+			break;
+		}
+	}
+})
 
 
 if(window.location.pathname == "/"){
 	indexIntro()
-
 
 }
 else

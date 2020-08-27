@@ -2,8 +2,6 @@
 <html lang="en">
 
 <head>
-
-
 	<link rel="stylesheet" type="text/css" href='/stylesheets/style.css'>
 	<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=6,"/>
@@ -15,13 +13,44 @@
 </head>
 
 
-<body data-barba="wrapper">
+<body data-barba="wrapper" class = "light" id="blue">
+
+<script type="text/javascript">if(localStorage.getItem("theme"))
+document.body.className = localStorage.getItem("theme")
+if(localStorage.getItem("accent"))
+document.body.id = localStorage.getItem("accent")
+</script>
 
 <nav>
 	<div class="logo"><a href= "/"> TOTH</a></div>
 	<ul class = "nav-links">
 		<li><a href="#">Sources</a></li>
-		<li><a href="#" onclick= "document.documentElement.style.cssText = '--blue:' + '#'+Math.floor(Math.random()*16777215).toString(16)">Theme</a></li>
+		
+		<li class = "nav-dropdown"><a href="#" >Theme</a>
+			<ul class="dropdown">
+				<div class="dropdown-option">
+					
+					<svg xmlns="http://www.w3.org/2000/svg" width = "22px" viewBox="0 0 512 512"><circle cx="256" cy="378.5" r="25"/><path d="M256 0C114.5 0 0 114.5 0 256c0 141.5 114.5 256 256 256 141.5 0 256-114.5 256-256C512 114.5 397.5 0 256 0zM256 472c-119.4 0-216-96.6-216-216 0-119.4 96.6-216 216-216 119.4 0 216 96.6 216 216C472 375.4 375.4 472 256 472z"/><path d="M256 128.5c-44.1 0-80 35.9-80 80 0 11 9 20 20 20s20-9 20-20c0-22.1 17.9-40 40-40 22.1 0 40 17.9 40 40 0 22.1-17.9 40-40 40 -11 0-20 9-20 20v50c0 11 9 20 20 20 11 0 20-9 20-20v-32.5c34.5-8.9 60-40.3 60-77.5C336 164.4 300.1 128.5 256 128.5z"/></svg>
+					<div id = "feeling-lucky"class = "link"> Feeling Lucky?</div>
+				
+				</div>
+				
+				<div class="separateur"></div>
+
+				<div class="dropdown-option">
+					
+					<svg xmlns="http://www.w3.org/2000/svg" width = "22px" viewBox="0 0 313 313"><path d="M305.6 178.1c-3.2-0.8-6.4 0-9.2 2 -10.4 8.8-22.4 16-35.6 20.8 -12.4 4.8-26 7.2-40.4 7.2 -32.4 0-62-13.2-83.2-34.4 -21.2-21.2-34.4-50.8-34.4-83.2 0-13.6 2.4-26.8 6.4-38.8 4.4-12.8 10.8-24.4 19.2-34.4 3.6-4.4 2.8-10.8-1.6-14.4 -2.8-2-6-2.8-9.2-2 -34 9.2-63.6 29.6-84.8 56.8 -20.4 26.8-32.8 60-32.8 96.4 0 43.6 17.6 83.2 46.4 112s68.4 46.4 112 46.4c36.8 0 70.8-12.8 98-34 27.6-21.6 47.6-52.4 56-87.6C314.4 184.9 311.2 179.3 305.6 178.1zM244.4 261.7c-23.2 18.4-52.8 29.6-85.2 29.6 -38 0-72.4-15.6-97.2-40.4 -24.8-24.8-40.4-59.2-40.4-97.2 0-31.6 10.4-60.4 28.4-83.6 12.4-16 28-29.2 46-38.4 -2 4.4-4 8.8-5.6 13.6 -5.2 14.4-7.6 29.6-7.6 45.6 0 38 15.6 72.8 40.4 97.6s59.6 40.4 97.6 40.4c16.8 0 32.8-2.8 47.6-8.4 5.2-2 10.4-4 15.2-6.4C274 232.5 260.8 248.9 244.4 261.7z"/></svg>
+					<div style= "cursor: default;"> Night Mode</div>
+					
+					<label class="switch">
+  						<input type="checkbox">
+  						<span class="slider"></span>
+					</label>
+				
+				</div>
+			</ul>
+		</li>
+		
 		<li><a href="#">About</a></li>
 	</ul>
 
