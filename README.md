@@ -21,14 +21,19 @@ To get this running on your local machine:
 
 2. Clone the repo or Download it as ZiP
 &nbsp;
-`` $ git clone https://github.com/ad-tra/Toth.git`` 
+	`` $ git clone https://github.com/ad-tra/Toth.git`` 
 
-	If you have windows, you can skip steps 3 & 4 by opening ``instal.bat`` then ``run.bat``
-
-3. Install dependencies:
+3. Go into the project directory
 &nbsp;
-`` $ npm install ``
-4. Start the app
+	``$ cd /Users/yourusername/Toth``
+	
+	If you have windows, you can skip steps 4 & 5 by opening ``instal.bat`` then ``run.bat``
+
+
+4. Install dependencies:
+&nbsp;
+	`` $ npm install ``
+5. Start the app
 	&nbsp;
 	``$ npm start``
 
@@ -36,7 +41,7 @@ To get this running on your local machine:
 Finally, Visit the website at [http://localhost:3000/](http://localhost:3000/)
 
 ## Built With
-Node, Express, and EJS
+Node, Express, Puppeteer, and EJS
 * [Node.js](https://nodejs.org/en/)
 * [Express](https://www.express.com/)
 * [EJS](https://ejs.co/)
