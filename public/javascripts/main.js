@@ -1,5 +1,5 @@
-const tl = gsap.timeline()
 //intro animatino for the index page
+const tl = gsap.timeline()
 function indexIntro(){
 tl
 .from('.background-pattern', {
@@ -34,7 +34,9 @@ tl
 	}, "-=.9");
 }
 
-
+/*
+listens for changes theme mode(dark or light)
+*/
 if(document.body.className == "dark"){
 	document.querySelector(".switch input").checked = true;
 }
@@ -51,7 +53,9 @@ drkModeCheck.addEventListener("click", ()=>{
 	}
 })
 
-
+/*
+listens for changes in accent colors
+*/
 var accentCheck = document.getElementById("feeling-lucky")
 accentCheck.addEventListener("click", () =>{
 	var colors = ["blue", "orange", "violet", "green"]
@@ -71,12 +75,14 @@ accentCheck.addEventListener("click", () =>{
 })
 
 
+
+//plays the intro animation if it is the index page
 if(window.location.pathname == "/"){
 	indexIntro()
-
 }
 else
 {
+	//populates line numbers into the article 
 	var len1 = document.querySelectorAll(".article-main")[0].offsetHeight;
 	var len2 = document.querySelectorAll(".article-main")[1].offsetHeight;
 	for(let i = 120; i<len1 + len2; i = i+120){
@@ -88,9 +94,15 @@ else
 		else
 		document.querySelectorAll(".line-num")[0].appendChild(num)	
 	}
-document.querySelector(".line-num p").style.paddingTop = document.querySelector(".instructions").offsetHeight +  document.querySelector(".article-intro").offsetHeight + 120 + "px"
+	//for the first line number
+	document.querySelector(".line-num p").style.paddingTop = document.querySelector(".instructions").offsetHeight +  document.querySelector(".article-intro").offsetHeight + 120 + "px"
 
-document.getElementById("next").addEventListener("click", () => {
+	
+
+	/*
+	handles events of the next button
+	*/
+	document.getElementById("next").addEventListener("click", () => {
 	//if index is less than 20
 	var fullQuery = window.location.search
 	var query = fullQuery.split("=")[0]
@@ -123,10 +135,10 @@ document.getElementById("next").addEventListener("click", () => {
 
 
 })
-
-document.getElementById("back").addEventListener("click", () => {
-history.back()
-})
+	//back button goes back in history 
+	document.getElementById("back").addEventListener("click", () => {
+		history.back()
+	})
 
 
 }
