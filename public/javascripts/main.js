@@ -1,4 +1,4 @@
-//intro animatino for the index page
+//intro animation for the index page
 const tl = gsap.timeline()
 function indexIntro(){
 tl
