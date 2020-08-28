@@ -13,16 +13,13 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 	<link rel="manifest" href="images/site.webmanifest">
 	<title>Toth - Read SAT passages</title>
+
 </head>
 
 
 <body data-barba="wrapper" class = "light" id= "blue">
 
-<script type="text/javascript">if(localStorage.getItem("theme"))
-document.body.className = localStorage.getItem("theme")
-if(localStorage.getItem("accent"))
-document.body.id = localStorage.getItem("accent")
-</script>
+	<script src ="javascripts/pre-load.js"></script>
 
 <nav>
 	<div class="logo"><a href= "/"> TOTH</a></div>
@@ -77,25 +74,16 @@ document.body.id = localStorage.getItem("accent")
 	</svg>
 </nav>	
 
-<section class="loader-container">
-	<div class="loader">
-		<h1>The passage is loading<h1>
-		<div class="lds-facebook"><div></div><div></div><div></div></div>
-	</div>
-	<h2 class="loadTime"> This takes about 5~10 seconds</h2>
-</section>
+
 
 
 <main id = "page"data-barba="container" id="app">
 	<div class="container">
 	
 
-	<% if (!locals.article) { %>	
-		<div id="get-article" method = "get" action= "/next-article">
-			<a id = "fetch"class = "link"> Start</a>
-			<h3>Click the Start button above to view an SAT level passage! <br>Have fun while reading</br></h3>
-		</div>	
-	<% } %>		
+
+
+
 	
 		<header id = "banner">
 			<h1>1<h1>
@@ -119,23 +107,26 @@ document.body.id = localStorage.getItem("accent")
 		
 		
 
+		<section class="loader-container">
+			<div class="loader">
+				
+				<div class="lds-facebook"><div></div><div></div><div></div></div>
+			</div>
+			<h2 class="loadTime"> Passage available in 5~10 seconds</h2>
+			
+		</section>
+	
 
-
-	<% if (locals.article) { %>
+	
+	
 		
-		<% var mid = article.substring(parseInt(article.length/2)).indexOf(" ")+parseInt(article.length/2) %>
-		<% var choices = [1,10,11,21,22,31,32,41,42,52]; 
-		let i = 2*parseInt(Math.random()*choices.length/2) %>	
+
 		<article>
 
 		<section>
 			<div class = "line-num"></div>
 			<div class="article-main" > 
-				<p class= "instructions">Questions <%- choices[i]+ "-" + choices[i+1] %> are based on the following passage.</p>
 				
-				<p class= "article-intro">This passage is from <a class= "link" target = "_blank" rel="noopener" href = "<%- link %>"><%-link.host%>;</a> <%-discrp%> Fetched from adaily.com, on <%-date%></p>
-				
-				<%- article.substring(0,mid) %>
 			</div>
 		</section>
 
@@ -143,7 +134,7 @@ document.body.id = localStorage.getItem("accent")
 
 		<section>
 			<div class = "line-num"></div>
-			<div class="article-main"><%-article.substring(mid) %></div>
+			<div class="article-main"></div>
 		</section>
 
 		</article>
@@ -159,7 +150,7 @@ document.body.id = localStorage.getItem("accent")
 			</div>	
 		</div>
 
-	<% } %>	
+	
 	
 	</div>
 	

@@ -507,6 +507,7 @@ font-family: 'doris-pp';
     font-size: 0.8em;
     text-indent: 0;
     line-height: 18px;
+    font-weight: 400;
 }
 .link {
     background: linear-gradient( to bottom, var(--blue) 0%, var(--blue) 100% );
@@ -559,15 +560,16 @@ font-family: 'doris-pp';
 }
 
 .pagination{
-	display: flex;
+	display: none;
 	flex-flow: row;
 	justify-content: space-evenly;
+	user-select: none;
 }
 .pagination h3{
 	margin-top: 0.5em !important;
 }
 .loader-container{
-	display: none;
+	display: inherit;
 }
 .loader{
 	display: flex;
@@ -575,7 +577,7 @@ font-family: 'doris-pp';
 	justify-content: center;
 	align-items: center;
 	font-size: 3em;
-	margin-top: 30%
+	margin-top: 10%
 }
 .loader h1{
 	text-align: center;
@@ -620,6 +622,8 @@ font-family: 'doris-pp';
 .loadTime{
 	text-align: center;
 	font-family: 'rokkitt-bold';
+	margin-top: 0.5em;
+	margin-bottom: 10%;
 }
 
 

@@ -1,32 +1,39 @@
-var monk = require('monk');
-var db = monk('localhost:27017/toth')
+
 var puppeteer = require('puppeteer');
 
-async function scrape(i,url){
+function calci(linkNum){
+	var page = parseInt(linkNum/26)
+	var result =  linkNum -(page*26)
+	return [result, page+1]
+}
 
+async function scrape(i){
+
+	const linkNum = calci(i)[0]
+	const url = `https://www.aldaily.com/essays-and-opinions/?page=${calci(i)[1]}`
 	const browser = await puppeteer.launch({headless: true});
 	const page = await browser.newPage();
 	await page.goto(url)
-	
+	page.setDefaultTimeout(10000)
 
 		const links = await page.$x("//a[contains(text(),'more')]")
 		await page.waitForXPath("//a[contains(text(),'more')]")
 
 		var dates = await page.$x("//a[contains(text(),',')]")
-		var tdate = await page.evaluate(element => element.textContent, dates[i]);
-		var tlink = await page.evaluate(element => element.getAttribute('href'), links[i])
+		var tdate = await page.evaluate(element => element.textContent, dates[linkNum]);
+		var tlink = await page.evaluate(element => element.getAttribute('href'), links[linkNum])
 
 		var discrps = await page.$x("//p")
-		var tdiscrp = await page.evaluate(element => element.textContent, discrps[i])
-		await links[i].click()
+		var tdiscrp = await page.evaluate(element => element.textContent, discrps[linkNum])
+		await links[linkNum].click()
 		
 
-		try{
+		
 			await page.waitForXPath("//p[contains(text(),'the')]")
 			
 			var text = ""
-			for(let i of await page.$x("//p[string-length() > 100]")){
-				text = text+ "<p>" +await page.evaluate(element => element.textContent, i)+ "</p>";
+			for(let linkNum of await page.$x("//p[string-length() > 100]")){
+				text = text+ "<p>" +await page.evaluate(element => element.textContent, linkNum)+ "</p>";
 			}
 
 			//Register var=text to a database if it doesm't already exists
@@ -37,19 +44,10 @@ async function scrape(i,url){
 			"discrp": tdiscrp.substring(tdiscrp.indexOf("|")+1, tdiscrp.length-9),
 			"visibility": "unseen"}
 			
-			console.log(`Downloaded Page ${i}'s Article ...`)
-
+			console.log(`Downloaded link ${linkNum}, page ${calci(i)[1]}'s  Article ...`)
+			await browser.close()
 			return str;
-		}
-		catch(e){
-			console.error(`Failed to Load Page ${i} => error: ${e}`)
-		}
-		
-		await page.goto(url)
 		
 	
-await browser.close()	
 }
-
-
 module.exports = scrape

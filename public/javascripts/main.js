@@ -28,7 +28,7 @@ tl
 .from('.button', 
 	{
 		autoAlpha:0,
-		duration: 1,
+		duration: 0.2,
 		x: 50,
 		ease: "power2",
 	}, "-=.9");
@@ -83,26 +83,12 @@ if(window.location.pathname == "/"){
 else
 {
 	//populates line numbers into the article 
-	var len1 = document.querySelectorAll(".article-main")[0].offsetHeight;
-	var len2 = document.querySelectorAll(".article-main")[1].offsetHeight;
-	for(let i = 120; i<len1 + len2; i = i+120){
-		
-		let num = document.createElement("P")
-		num.innerHTML= i/24
-		if(i>len1)
-		document.querySelectorAll(".line-num")[1].appendChild(num)
-		else
-		document.querySelectorAll(".line-num")[0].appendChild(num)	
-	}
-	//for the first line number
-	document.querySelector(".line-num p").style.paddingTop = document.querySelector(".instructions").offsetHeight +  document.querySelector(".article-intro").offsetHeight + 120 + "px"
 
-	
 
 	/*
 	handles events of the next button
 	*/
-	document.getElementById("next").addEventListener("click", () => {
+	/*document.getElementById("next").addEventListener("click", () => {
 	//if index is less than 20
 	var fullQuery = window.location.search
 	var query = fullQuery.split("=")[0]
@@ -115,34 +101,51 @@ else
 	}	
 	
 	else{ 
-	if(queryValue == 19) {
-		var newQuery =0
-	}
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', `get-article?load=${newQuery}`)
+		if(queryValue == 19) 
+			var newQuery =0
 
-    if(xhr.readyState == 1){
-    	document.querySelector("main").style.display= "none"
-		document.querySelector(".loader-container").style.display= "inherit"
-    }
-    xhr.onerror = function(){
-    console.log('Request Error...');
-    }
+
+    	var xhr = new XMLHttpRequest();
+    	xhr.open('GET', `get-article?load=${newQuery}`)
+
+    	if(xhr.readyState == 1){
+    		document.querySelector("main").style.display= "none"
+			document.querySelector(".loader-container").style.display= "inherit"
+    	}
+    	
+    	xhr.onerror = function(){
+    	console.log('Request Error...');
+    	}	
       
-    xhr.send();
-	window.location.href = `get-article?load=${newQuery}`
+    	xhr.send();
+		window.location.href = `get-article?load=${newQuery}`
 	}
 
 
-})
+})*/
+
+	document.getElementById("next").addEventListener("click", nextArticle)
+
+
 	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {
-		history.back()
+		articleNum--;
+		localStorage.setItem("articleNum", articleNum)
+		console.log(articleNum)
+		loadArticle()
 	})
 
 
 }
 
+
+function nextArticle(){
+	articleNum++
+	localStorage.setItem("articleNum", articleNum)
+	console.log(articleNum)
+	loadArticle()
+	
+}
 
 
 
