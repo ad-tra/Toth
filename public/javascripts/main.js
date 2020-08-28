@@ -129,10 +129,17 @@ else
 
 	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {
+		
+		if(articleNum ==0){
+			window.location.href = "/"
+		}
+		else{
 		articleNum--;
 		localStorage.setItem("articleNum", articleNum)
 		console.log(articleNum)
 		loadArticle()
+		}
+
 	})
 
 

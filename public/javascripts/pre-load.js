@@ -76,7 +76,7 @@ function loadArticle(){
 }
 
 var articleNum = localStorage.getItem("articleNum") || 0;
-
+localStorage.setItem("articleNum", articleNum)
 
 if(localStorage.getItem("articleNum") && document.location.pathname == "/app")
 { 

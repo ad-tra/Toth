@@ -374,9 +374,6 @@ main{
 		flex-flow: column-reverse;
 
 	}
-	.loadTime{
-		font-size:0.5em;
-	}
 }
 
 .transition-fade {
