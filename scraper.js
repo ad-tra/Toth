@@ -6,7 +6,7 @@ var puppeteer = require('puppeteer');
 async function scrape(date){
 
 	const url = `https://www.aldaily.com/archives/${date}`
-	const browser = await puppeteer.launch({headless: false});
+	const browser = await puppeteer.launch({headless: true});
 	const page = await browser.newPage();
 	page.setDefaultTimeout(10000)
 	await page.goto(url)
