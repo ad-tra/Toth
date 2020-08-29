@@ -82,48 +82,6 @@ if(window.location.pathname == "/"){
 }
 else
 {
-	//populates line numbers into the article 
-
-
-	/*
-	handles events of the next button
-	*/
-	/*document.getElementById("next").addEventListener("click", () => {
-	//if index is less than 20
-	var fullQuery = window.location.search
-	var query = fullQuery.split("=")[0]
-	var queryValue = parseInt(fullQuery.split("=")[1])
-	var newQuery = queryValue + 1
-	
-	if(queryValue<19 && query == "?index"){ 
-
-		window.location.href = `?index=${newQuery}`;
-	}	
-	
-	else{ 
-		if(queryValue == 19) 
-			var newQuery =0
-
-
-    	var xhr = new XMLHttpRequest();
-    	xhr.open('GET', `get-article?load=${newQuery}`)
-
-    	if(xhr.readyState == 1){
-    		document.querySelector("main").style.display= "none"
-			document.querySelector(".loader-container").style.display= "inherit"
-    	}
-    	
-    	xhr.onerror = function(){
-    	console.log('Request Error...');
-    	}	
-      
-    	xhr.send();
-		window.location.href = `get-article?load=${newQuery}`
-	}
-
-
-})*/
-
 	document.getElementById("next").addEventListener("click", nextArticle)
 
 
@@ -154,6 +112,12 @@ function nextArticle(){
 	
 }
 
+//repopulates lines every time user changes window size
+var el = document.querySelector(".article-main")
+new ResizeObserver(()=>{
+	document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
+	populateLine()
+}).observe(el)
 
 
 
