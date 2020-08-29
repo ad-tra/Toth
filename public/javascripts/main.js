@@ -9,7 +9,7 @@ tl
 })
 .to('.left-panel', 
 	{
-		
+
 		autoAlpha:1,
 		duration: 1,
 		y: -25, 
@@ -28,7 +28,7 @@ tl
 .from('.button', 
 	{
 		autoAlpha:0,
-		duration: 0.2,
+		duration: 1,
 		x: 50,
 		ease: "power2",
 	}, "-=.9");
@@ -130,14 +130,14 @@ else
 	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {
 		
-		if(articleNum ==0){
+		if(articleDate == "later change this"){
 			window.location.href = "/"
 		}
 		else{
-		articleNum--;
-		localStorage.setItem("articleNum", articleNum)
+		articleDate = dateAddition(articleDate, 1)
+    	localStorage.setItem("articleDate" , articleDate)
 		console.log(articleNum)
-		loadArticle()
+		loadArticle(1)
 		}
 
 	})
@@ -147,10 +147,10 @@ else
 
 
 function nextArticle(){
-	articleNum++
-	localStorage.setItem("articleNum", articleNum)
-	console.log(articleNum)
-	loadArticle()
+	articleDate = dateAddition(articleDate, -1)
+    localStorage.setItem("articleDate" , articleDate)
+	console.log(articleNum,)
+	loadArticle(-1)
 	
 }
 

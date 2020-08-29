@@ -4,8 +4,14 @@ if(localStorage.getItem("theme"))
 if(localStorage.getItem("accent"))
 	document.body.id = localStorage.getItem("accent")
 
+function formatDate(date){
+	return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+}
 
-
+function dateAddition(date, i){
+	var newDate= new Date(new Date().setDate(new Date(date).getDate() + i))
+	return `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`
+}
 
 function populateLine(){ 
 var len1 = document.querySelectorAll(".article-main")[0].offsetHeight;
@@ -36,17 +42,17 @@ function populateRes(response){
 
 	document.querySelectorAll(".article-main")[0].innerHTML = `<h1 class= "instructions">Questions ${choices[i]}-${choices[i+1]} are based on the following passage.</h1><h3 class= "article-intro">This passage is from <a class= "link" target = "_blank" rel="noopener" href = "${link}"> ${link.host}</a> ${discrp} Fetched from adaily.com, on ${date}</h3> ${article.substring(0,mid)}`
 	document.querySelectorAll(".article-main")[1].innerHTML = article.substring(mid)
-	document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
 	
+	document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
 	populateLine()
 }
 
 
 
 
-function loadArticle(){
+function loadArticle(n){
 	var xhr = new XMLHttpRequest()
-	xhr.open("GET", `/test?index=${articleNum}`, true)
+	xhr.open("GET", `/get-passage?date=${articleDate}`, true)
 	xhr.responseType = 'text';
     if(document.querySelector(".pagination") != null){
 		document.querySelector(".pagination").style.display = "none"
@@ -56,7 +62,8 @@ function loadArticle(){
 
 	xhr.onload = function () {
     	if (xhr.readyState === xhr.DONE) {
-        	if (xhr.status === 200) {
+        	if (xhr.status === 200 || xhr.status === 304) {
+            	
             	var response = JSON.parse(xhr.response)
             	
             	document.querySelector("article").style.display = "flex"
@@ -66,8 +73,8 @@ function loadArticle(){
 
         	}
     		if(xhr.status === 500){
-    			articleNum++
-    			localStorage.setItem("articleNum" , articleNum)
+    			articleDate = dateAddition(articleDate, n)
+    			localStorage.setItem("articleDate" , articleDate)
     			loadArticle()
     		}
     	}
@@ -78,8 +85,11 @@ function loadArticle(){
 var articleNum = localStorage.getItem("articleNum") || 0;
 localStorage.setItem("articleNum", articleNum)
 
-if(localStorage.getItem("articleNum") && document.location.pathname == "/app")
+var articleDate = localStorage.getItem("articleDate") || formatDate(new Date())
+localStorage.setItem("articleDate", articleDate)
+
+if(localStorage.getItem("articleDate") && document.location.pathname == "/app")
 { 
-loadArticle()
+loadArticle(-1)
 
 }

@@ -1,49 +1,56 @@
-var scrape = require("../scraper.js")
+var scrape = require("../scraper.js");
 var express = require('express');
-const fs = require('fs')
+var flatCache = require('flat-cache')
+var path = require('path')
 var router = express.Router();
-var articleNum;
+var articleDate;
 
 
-router.get('/app',  function(req, res, next) {
+router.get('/app',  function(req, res) {
   res.render('app')
 })
 
 
-
-router.get("/test", async (req, res) =>{
-  if(req.query.index)
-    articleNum = req.query.index
-  
-  if(articleNum<20){ 
-
-   fs.readFile('./toth.json', 'utf8', (err, jsonString) => {
-      try {
-
-        const docs = JSON.parse(jsonString)
-        res.send(docs[articleNum])
-        //res.render("app", {article: docs[articleNum].content,link: new URL(docs[articleNum].link),date: docs[articleNum].date,discrp: docs[articleNum].discrp})
-      } 
-      
-      catch(err) {
-        res.send("Sorry, there was an error: " + err)
-        return
+let cacheMiddleware = async (req, res, next)=>{
+  let cache = flatCache.load('storredPassages', path.join('./cache'))
+  let key = req.query.date
+  let cacheContent = cache.getKey(key);
+  if(cacheContent){
+    if(cacheContent == "failed"){
+      res.setHeader('Scraper-Status', 'failed');
+      res.status(500).send(null);
+    }
+    else{
+      res.send(cacheContent)
+    }
+  }else{
+    res.sendResponse = res.send;
+    res.send = (body) =>{
+      if(body != null){
+        cache.setKey(key, body);
+        cache.save(true)
+      }else{
+        cache.setKey(key, "failed");
+        cache.save(true)
       }
-    })
+      res.sendResponse(body)
+    }
+    next()
   }
-  
-  else{
-    try{ 
-    var docs = await scrape(articleNum)
-    await res.send(docs)
 }
+
+router.get("/get-passage", cacheMiddleware, async (req, res) =>{
+  
+  if(req.query.date)
+    articleDate = req.query.date
+  try{ 
+    var docs = await scrape(articleDate)
+    await res.send(docs)
+  }
   catch(e){
     res.setHeader('Scraper-Status', 'failed');
-    res.status(500).send({ error: "boo:(" });
-}
-  
+    res.status(500).send(null);
   }
-
 })
 
 
