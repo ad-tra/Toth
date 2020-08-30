@@ -68,11 +68,16 @@ function loadArticle(n){
             	
             	document.querySelector("article").style.display = "flex"
             	populateRes(response)
+        		
         		document.querySelector(".loader-container").style.display = "none"
         		document.querySelector(".pagination").style.display = "flex"
-
+        		document.querySelectorAll(".article-main p")[0].scrollIntoView({ behavior: 'smooth', block: 'end'})
         	}
     		if(xhr.status === 500){
+    			if(articleDate == dateAddition(new Date(), -1)){
+    				window.location.href = "/"
+    				console.log("reached max")
+    			}
     			articleDate = dateAddition(articleDate, n)
     			localStorage.setItem("articleDate" , articleDate)
     			loadArticle()

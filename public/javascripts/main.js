@@ -82,13 +82,15 @@ if(window.location.pathname == "/"){
 }
 else
 {
+
+
 	document.getElementById("next").addEventListener("click", nextArticle)
 
 
 	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {
 		
-		if(articleDate == "later change this"){
+		if(articleDate == formatDate(new Date())){
 			window.location.href = "/"
 		}
 		else{
@@ -100,7 +102,17 @@ else
 
 	})
 
-
+	//repopulates lines every time user changes window size
+	var el = document.querySelector(".article-main")
+	new ResizeObserver(()=>{
+		document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
+		try{
+			populateLine()
+		}
+		catch(e){
+			console.log("ResizeObserver malfunction")
+		}
+	}).observe(el)
 }
 
 
@@ -112,12 +124,7 @@ function nextArticle(){
 	
 }
 
-//repopulates lines every time user changes window size
-var el = document.querySelector(".article-main")
-new ResizeObserver(()=>{
-	document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
-	populateLine()
-}).observe(el)
+
 
 
 
