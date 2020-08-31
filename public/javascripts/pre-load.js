@@ -50,9 +50,9 @@ function populateRes(response){
 
 
 
-function loadArticle(n){
+function loadArticle(source, n){
 	var xhr = new XMLHttpRequest()
-	xhr.open("GET", `/get-passage?date=${articleDate}`, true)
+	xhr.open("GET", `/${source}?date=${articleDate}`, true)
 	xhr.responseType = 'text';
     if(document.querySelector(".pagination") != null){
 		document.querySelector(".pagination").style.display = "none"
@@ -74,27 +74,29 @@ function loadArticle(n){
         		document.querySelectorAll(".article-main p")[0].scrollIntoView({ behavior: 'smooth', block: 'end'})
         	}
     		if(xhr.status === 500){
-    			if(articleDate == dateAddition(new Date(), -1)){
+    			if(localStorage.setItem("articleDate" , articleDate) == dateAddition(new Date(), -1)){
     				window.location.href = "/"
     				console.log("reached max")
     			}
     			articleDate = dateAddition(articleDate, n)
     			localStorage.setItem("articleDate" , articleDate)
-    			loadArticle()
+    			loadArticle(source, n)
     		}
     	}
 	};
 	xhr.send()
 }
 
-var articleNum = localStorage.getItem("articleNum") || 0;
-localStorage.setItem("articleNum", articleNum)
+var articleSource = localStorage.getItem("articleSource") || "articles-of-note";
+localStorage.setItem("articleSource", articleSource)
+
 
 var articleDate = localStorage.getItem("articleDate") || formatDate(new Date())
 localStorage.setItem("articleDate", articleDate)
 
-if(localStorage.getItem("articleDate") && document.location.pathname == "/app")
+
+if( document.location.pathname == "/app")
 { 
-loadArticle(-1)
+loadArticle(articleSource, -1)
 
 }

@@ -15,7 +15,7 @@ tl
 		y: -25, 
 		ease: "power3",
 		delay:0.3
-	}, "-=1.1")
+	}, "-=0.8")
 
 .from('.button-pattern', 
 	{
@@ -82,10 +82,40 @@ if(window.location.pathname == "/"){
 }
 else
 {
+	var note = document.getElementById("note")
+	var essays = document.getElementById("essays")
+	//changes the source to articles of notes
+	note.addEventListener("click",()=>{
 
+		articleSource = "articles-of-note"
+		localStorage.setItem("articleSource", "articles-of-note")
+		document.title = "Toth - Read Articles of Note"
+		note.style.pointerEvents = "none"
+		note.style.opacity = "0.6"
 
+		essays.style.pointerEvents = "inherit"
+		essays.style.opacity = "1"
+		loadArticle(articleSource,-1)
+	})
+	
+	//changes the source to essays and opinions
+	essays.addEventListener("click",()=>{
+		articleSource = "essays-opinions"
+		localStorage.setItem("articleSource", "essays-opinions")
+		document.title = "Toth - Read Essays & Opinions"
+		
+		essays.style.pointerEvents = "none"
+		essays.style.opacity = "0.6"
+
+		note.style.pointerEvents = "inherit"
+		note.style.opacity = "1"
+		loadArticle(articleSource, -1)
+	})
+	
+	
+
+	//next button
 	document.getElementById("next").addEventListener("click", nextArticle)
-
 
 	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {
@@ -96,8 +126,7 @@ else
 		else{
 		articleDate = dateAddition(articleDate, 1)
     	localStorage.setItem("articleDate" , articleDate)
-		console.log(articleNum)
-		loadArticle(1)
+		loadArticle(articleSource, 1)
 		}
 
 	})
@@ -119,8 +148,7 @@ else
 function nextArticle(){
 	articleDate = dateAddition(articleDate, -1)
     localStorage.setItem("articleDate" , articleDate)
-	console.log(articleNum,)
-	loadArticle(-1)
+	loadArticle(articleSource, -1)
 	
 }
 

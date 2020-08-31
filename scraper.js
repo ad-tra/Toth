@@ -3,7 +3,7 @@ var puppeteer = require('puppeteer');
 
 
 
-async function scrape(date){
+async function scrape(articleType ,date){
 
 	const url = `https://www.aldaily.com/archives/${date}`
 	const browser = await puppeteer.launch({headless: true});
@@ -13,8 +13,8 @@ async function scrape(date){
 
 	//aldaily page
 	await page.waitForXPath("//a[contains(text(),'more')]")
-	const tlink = await page.evaluate("document.querySelector('.mobile-front p a').getAttribute('href')")
-	const tdiscrp = await page.evaluate("document.querySelector('.mobile-front p').innerText")
+	const tlink = await page.evaluate(`document.querySelectorAll('.mobile-front p a')[${articleType}].getAttribute('href')`)
+	const tdiscrp = await page.evaluate(`document.querySelectorAll('.mobile-front p')[${articleType}].innerText`)
 	await page.goto(tlink)
 
 	//the article publisher page
@@ -36,5 +36,4 @@ async function scrape(date){
 	return str;
 	
 }
-
 module.exports = scrape
