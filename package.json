@@ -1,5 +1,5 @@
 {
-  "name": "toth-gen",
+  "name": "toth",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,8 +12,6 @@
     "express": "~4.16.1",
     "flat-cache": "^2.0.1",
     "http-errors": "~1.6.3",
-    "mongodb": "^3.6.0",
-    "monk": "^7.3.1",
     "morgan": "~1.9.1",
     "puppeteer": "^5.2.1"
   }
