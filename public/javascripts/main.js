@@ -124,18 +124,10 @@ else
 
 	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {	
-
-		if(loadArticle(articleSource, -1) == 'max'){
-			document.location = "/"
-			articleDate = dateAddition(articleDate, -1)
-    		localStorage.setItem("articleDate" , articleDate)
-		}
-		else{
-			articleDate = dateAddition(articleDate, 1)
-    		localStorage.setItem("articleDate" , articleDate)
-			loadArticle(articleSource, 1)
-		}
-		
+	
+		articleDate = dateAddition(articleDate, 1)
+    	localStorage.setItem("articleDate" , articleDate)
+		loadArticle(articleSource, 1)
 	})
 
 	//repopulates lines every time user changes window size

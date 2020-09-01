@@ -4,9 +4,6 @@ if(localStorage.getItem("theme"))
 if(localStorage.getItem("accent"))
 	document.body.id = localStorage.getItem("accent")
 
-function formatDate(date){
-	return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
-}
 
 function dateAddition(date, i){
 	var newDate=  new Date(new Date(date).getTime() + i*24*60*60*1000);
@@ -51,9 +48,7 @@ function populateRes(response){
 
 
 function loadArticle(source, n){
-	if(new Date(articleDate).getTime() > new Date(dateAddition(new Date(), -2)).getTime())
-    	return "max"
-    else			
+		
 
 	var xhr = new XMLHttpRequest()
 	xhr.open("GET", `/${source}?date=${articleDate}`, true)
@@ -81,9 +76,14 @@ function loadArticle(source, n){
         	}
     		
     		if(xhr.status === 500){
-    			articleDate = dateAddition(articleDate, n)
-    			localStorage.setItem("articleDate" , articleDate)
-    			loadArticle(source, n)
+    			if(n == 1 && new Date(articleDate).getTime() > new Date(dateAddition(new Date(), -3)).getTime())
+    				document.location.href = "/"
+    			
+    			else{
+    				articleDate = dateAddition(articleDate, n)
+    				localStorage.setItem("articleDate" , articleDate)
+    				loadArticle(source, n)
+    			}
     		}
     	}
 	};
@@ -100,10 +100,6 @@ localStorage.setItem("articleDate", articleDate)
 
 if( document.location.pathname == "/app")
 { 
-//loadArticle(articleSource, -1)
-if(loadArticle(articleSource, -1) == 'max'){
-	articleDate = dateAddition(articleDate, -1)
-    localStorage.setItem("articleDate" , articleDate)
-}
+loadArticle(articleSource, -1)
 
 }

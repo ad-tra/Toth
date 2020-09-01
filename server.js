@@ -3,8 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-//var monk = require('monk');
-//var db = monk('localhost:27017/toth')
 var indexRouter = require('./routes/index');
 var appRouter = require('./routes/app');
 
@@ -19,12 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-//make db accesible to router
-/*app.use((req, res, next)=>{
-	req.db = db;
-	next();
-})*/
 
 app.use('/', indexRouter);
 app.use('/', appRouter);
