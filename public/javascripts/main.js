@@ -115,20 +115,27 @@ else
 	
 
 	//next button
-	document.getElementById("next").addEventListener("click", nextArticle)
+	document.getElementById("next").addEventListener("click", () =>{
+		
+		articleDate = dateAddition(articleDate, -1)
+    	localStorage.setItem("articleDate" , articleDate)
+		loadArticle(articleSource, -1)
+	})
 
 	//back button goes back in history 
-	document.getElementById("back").addEventListener("click", () => {
-		
-		if(articleDate == formatDate(new Date())){
-			window.location.href = "/"
+	document.getElementById("back").addEventListener("click", () => {	
+
+		if(loadArticle(articleSource, -1) == 'max'){
+			document.location = "/"
+			articleDate = dateAddition(articleDate, -1)
+    		localStorage.setItem("articleDate" , articleDate)
 		}
 		else{
-		articleDate = dateAddition(articleDate, 1)
-    	localStorage.setItem("articleDate" , articleDate)
-		loadArticle(articleSource, 1)
+			articleDate = dateAddition(articleDate, 1)
+    		localStorage.setItem("articleDate" , articleDate)
+			loadArticle(articleSource, 1)
 		}
-
+		
 	})
 
 	//repopulates lines every time user changes window size
@@ -144,13 +151,6 @@ else
 	}).observe(el)
 }
 
-
-function nextArticle(){
-	articleDate = dateAddition(articleDate, -1)
-    localStorage.setItem("articleDate" , articleDate)
-	loadArticle(articleSource, -1)
-	
-}
 
 
 

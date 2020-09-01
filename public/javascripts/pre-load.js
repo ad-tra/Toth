@@ -9,7 +9,7 @@ function formatDate(date){
 }
 
 function dateAddition(date, i){
-	var newDate= new Date(new Date().setDate(new Date(date).getDate() + i))
+	var newDate=  new Date(new Date(date).getTime() + i*24*60*60*1000);
 	return `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`
 }
 
@@ -51,6 +51,10 @@ function populateRes(response){
 
 
 function loadArticle(source, n){
+	if(new Date(articleDate).getTime() > new Date(dateAddition(new Date(), -2)).getTime())
+    	return "max"
+    else			
+
 	var xhr = new XMLHttpRequest()
 	xhr.open("GET", `/${source}?date=${articleDate}`, true)
 	xhr.responseType = 'text';
@@ -60,7 +64,9 @@ function loadArticle(source, n){
 		document.querySelector("article").style.display = "none"
     }
 
+
 	xhr.onload = function () {
+
     	if (xhr.readyState === xhr.DONE) {
         	if (xhr.status === 200 || xhr.status === 304) {
             	
@@ -73,11 +79,8 @@ function loadArticle(source, n){
         		document.querySelector(".pagination").style.display = "flex"
         		document.querySelectorAll(".article-main p")[0].scrollIntoView({ behavior: 'smooth', block: 'end'})
         	}
+    		
     		if(xhr.status === 500){
-    			if(localStorage.setItem("articleDate" , articleDate) == dateAddition(new Date(), -1)){
-    				window.location.href = "/"
-    				console.log("reached max")
-    			}
     			articleDate = dateAddition(articleDate, n)
     			localStorage.setItem("articleDate" , articleDate)
     			loadArticle(source, n)
@@ -91,12 +94,16 @@ var articleSource = localStorage.getItem("articleSource") || "articles-of-note";
 localStorage.setItem("articleSource", articleSource)
 
 
-var articleDate = localStorage.getItem("articleDate") || formatDate(new Date())
+var articleDate = localStorage.getItem("articleDate") || dateAddition(new Date(), -3)
 localStorage.setItem("articleDate", articleDate)
 
 
 if( document.location.pathname == "/app")
 { 
-loadArticle(articleSource, -1)
+//loadArticle(articleSource, -1)
+if(loadArticle(articleSource, -1) == 'max'){
+	articleDate = dateAddition(articleDate, -1)
+    localStorage.setItem("articleDate" , articleDate)
+}
 
 }
