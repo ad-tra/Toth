@@ -5,7 +5,7 @@
  */
 
 var app = require('../server');
-var debug = require('debug')('toth-gen:server');
+var debug = require('debug')('toth:server');
 var http = require('http');
 
 /**
@@ -29,6 +29,7 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+console.log("\x1b[32m", 'Success, Website available at https://localhost:3000');
 /**
  * Normalize a port into a number, string, or false.
  */
