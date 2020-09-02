@@ -53,6 +53,7 @@ drkModeCheck.addEventListener("click", ()=>{
 	}
 })
 
+
 /*
 listens for changes in accent colors
 */
@@ -84,31 +85,48 @@ else
 {
 	var note = document.getElementById("note")
 	var essays = document.getElementById("essays")
+	
+	if(localStorage.getItem("articleSource") == "articlesOfNote"){
+		note.style.pointerEvents = "none"
+		note.style.opacity = "0.8"
+		document.title = "Toth- Articles of Note"
+	}
+
+	if(localStorage.getItem("articleSource") == "essaysOpinions"){
+		essays.style.pointerEvents = "none"
+		essays.style.opacity = "0.8"
+		document.title = "Toth- Essays & Opinions"
+	}
 	//changes the source to articles of notes
 	note.addEventListener("click",()=>{
 
-		articleSource = "articles-of-note"
-		localStorage.setItem("articleSource", "articles-of-note")
-		document.title = "Toth - Read Articles of Note"
+
+		articleSource = "articlesOfNote"
+		localStorage.setItem("articleSource", "articlesOfNote")
+		document.title = "Toth - Articles of Note"
 		note.style.pointerEvents = "none"
-		note.style.opacity = "0.6"
+		note.style.opacity = "0.8"
 
 		essays.style.pointerEvents = "inherit"
 		essays.style.opacity = "1"
+		
+		articleDate = JSON.parse(articleDates)[articleSource]
 		loadArticle(articleSource,-1)
 	})
 	
 	//changes the source to essays and opinions
 	essays.addEventListener("click",()=>{
-		articleSource = "essays-opinions"
-		localStorage.setItem("articleSource", "essays-opinions")
-		document.title = "Toth - Read Essays & Opinions"
+		articleSource = "essaysOpinions"
+		localStorage.setItem("articleSource", "essaysOpinions")
+		document.title = "Toth - Essays & Opinions"
 		
 		essays.style.pointerEvents = "none"
-		essays.style.opacity = "0.6"
+		essays.style.opacity = "0.8"
 
 		note.style.pointerEvents = "inherit"
 		note.style.opacity = "1"
+		
+		articleDate = JSON.parse(articleDates)[articleSource]
 		loadArticle(articleSource, -1)
 	})
 	
@@ -117,16 +135,14 @@ else
 	//next button
 	document.getElementById("next").addEventListener("click", () =>{
 		
-		articleDate = dateAddition(articleDate, -1)
-    	localStorage.setItem("articleDate" , articleDate)
+		articleDateAdd(-1)
 		loadArticle(articleSource, -1)
 	})
 
 	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {	
 	
-		articleDate = dateAddition(articleDate, 1)
-    	localStorage.setItem("articleDate" , articleDate)
+		articleDateAdd(1)
 		loadArticle(articleSource, 1)
 	})
 

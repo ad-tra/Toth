@@ -41,7 +41,7 @@ return async (req, res, next)=>{
 }
 }
 
-router.get("/articles-of-note", cacheMiddleware("articlesOfNote"), async (req, res) =>{
+router.get("/articlesOfNote", cacheMiddleware("articlesOfNote"), async (req, res) =>{
   
   if(req.query.date)
     articleDate = req.query.date
@@ -55,7 +55,7 @@ router.get("/articles-of-note", cacheMiddleware("articlesOfNote"), async (req, r
 })
 
 
-router.get("/essays-opinions", cacheMiddleware("essaysOpinions"), async (req, res) =>{
+router.get("/essaysOpinions", cacheMiddleware("essaysOpinions"), async (req, res) =>{
   
   if(req.query.date)
     articleDate = req.query.date

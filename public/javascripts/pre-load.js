@@ -5,7 +5,7 @@ if(localStorage.getItem("accent"))
 	document.body.id = localStorage.getItem("accent")
 
 
-function dateAddition(date, i){
+function dateAdd(date, i){
 	var newDate=  new Date(new Date(date).getTime() + i*24*60*60*1000);
 	return `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`
 }
@@ -76,12 +76,11 @@ function loadArticle(source, n){
         	}
     		
     		if(xhr.status === 500){
-    			if(n == 1 && new Date(articleDate).getTime() > new Date(dateAddition(new Date(), -3)).getTime())
+    			if(n == 1 && new Date(articleDate).getTime() > new Date(dateAdd(new Date(), -3)).getTime())
     				document.location.href = "/"
     			
     			else{
-    				articleDate = dateAddition(articleDate, n)
-    				localStorage.setItem("articleDate" , articleDate)
+    				articleDateAdd(n)
     				loadArticle(source, n)
     			}
     		}
@@ -90,13 +89,24 @@ function loadArticle(source, n){
 	xhr.send()
 }
 
-var articleSource = localStorage.getItem("articleSource") || "articles-of-note";
+var articleSource = localStorage.getItem("articleSource") || "articlesOfNote";
 localStorage.setItem("articleSource", articleSource)
 
 
-var articleDate = localStorage.getItem("articleDate") || dateAddition(new Date(), -3)
-localStorage.setItem("articleDate", articleDate)
+var articleDates = localStorage.getItem("articleDates") || JSON.stringify({"articlesOfNote" : `${dateAdd(new Date(), -3)}`, "essaysOpinions" : `${dateAdd(new Date(), -3)}`})
+localStorage.setItem("articleDates", articleDates)
 
+var articleDate = JSON.parse(articleDates)[articleSource]
+
+function articleDateAdd(n){
+	articleDate = dateAdd(articleDate, n)
+	
+	let obj = JSON.parse(localStorage.getItem("articleDates"))
+	obj[articleSource] = articleDate
+	
+	localStorage.setItem("articleDates", JSON.stringify(obj))
+	articleDates  = localStorage.getItem("articleDates")
+}
 
 if( document.location.pathname == "/app")
 { 
