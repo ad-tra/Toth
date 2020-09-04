@@ -1,4 +1,4 @@
-var scrape = require("../scraper.js");
+var scraper = require("../scraper.js");
 var express = require('express');
 var flatCache = require('flat-cache')
 var path = require('path')
@@ -46,7 +46,7 @@ router.get("/articlesOfNote", cacheMiddleware("articlesOfNote"), async (req, res
   if(req.query.date)
     articleDate = req.query.date
   try{ 
-    var docs = await scrape(0,articleDate)
+    var docs = await scraper.scrape(0,articleDate)
     await res.send(docs)
   }
   catch(e){
@@ -60,7 +60,20 @@ router.get("/essaysOpinions", cacheMiddleware("essaysOpinions"), async (req, res
   if(req.query.date)
     articleDate = req.query.date
   try{ 
-    var docs = await scrape(2,articleDate)
+    var docs = await scraper.scrape(2,articleDate)
+    await res.send(docs)
+  }
+  catch(e){
+    res.status(500).send(null);
+  }
+})
+
+router.get("/science", cacheMiddleware("sciencePassages"), async (req, res) =>{
+  
+  if(req.query.date)
+    articleDate = req.query.date
+  try{ 
+    var docs = await scraper.scrapeScience(articleDate)
     await res.send(docs)
   }
   catch(e){

@@ -11,19 +11,21 @@ function dateAdd(date, i){
 }
 
 function populateLine(){ 
+
+document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
 var len1 = document.querySelectorAll(".article-main")[0].offsetHeight;
 var len2 = document.querySelectorAll(".article-main")[1].offsetHeight;
-for(let i = 120; i<len1 + len2; i = i+120){
+for(let i = 135; i<len1 + len2; i = i+135){
 		
 	let num = document.createElement("P")
-	num.innerHTML= i/24
+	num.innerHTML= i/27
 	if(i>len1)
 		document.querySelectorAll(".line-num")[1].appendChild(num)
 	else
 		document.querySelectorAll(".line-num")[0].appendChild(num)	
 	}
 //for the first line number
-document.querySelector(".line-num p").style.paddingTop = document.querySelector(".instructions").offsetHeight +  document.querySelector(".article-intro").offsetHeight + 120 + "px"
+document.querySelector(".line-num p").style.paddingTop = document.querySelector(".instructions").offsetHeight +  document.querySelector(".article-intro").offsetHeight + 135 + "px"
 }
 
 
@@ -40,7 +42,7 @@ function populateRes(response){
 	document.querySelectorAll(".article-main")[0].innerHTML = `<h1 class= "instructions">Questions ${choices[i]}-${choices[i+1]} are based on the following passage.</h1><h3 class= "article-intro">This passage is from <a class= "link" target = "_blank" rel="noopener" href = "${link}"> ${link.host}</a> ${discrp} Fetched from adaily.com, on ${date}</h3> ${article.substring(0,mid)}`
 	document.querySelectorAll(".article-main")[1].innerHTML = article.substring(mid)
 	
-	document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
+	
 	populateLine()
 }
 
@@ -58,10 +60,14 @@ function loadArticle(source, n){
 		document.querySelector(".loader-container").style.display = "inherit"	
 		document.querySelector("article").style.display = "none"
     }
-
-
+	
+	if(n == 1 && (new Date(articleDate).getTime() >= new Date(dateAdd(new Date(), -3)).getTime() || articleDate < 0)){
+		document.location.href = "/" 
+    	articleDateAdd(-1)
+    	return null
+    }
+    else{ 
 	xhr.onload = function () {
-
     	if (xhr.readyState === xhr.DONE) {
         	if (xhr.status === 200 || xhr.status === 304) {
             	
@@ -72,40 +78,42 @@ function loadArticle(source, n){
         		
         		document.querySelector(".loader-container").style.display = "none"
         		document.querySelector(".pagination").style.display = "flex"
-        		document.querySelectorAll(".article-main p")[0].scrollIntoView({ behavior: 'smooth', block: 'end'})
+        		document.querySelectorAll(".article-main p")[0].scrollIntoView({ behavior: 'smooth', block: 'center'})
         	}
     		
     		if(xhr.status === 500){
-    			if(n == 1 && new Date(articleDate).getTime() > new Date(dateAdd(new Date(), -3)).getTime())
-    				document.location.href = "/"
-    			
-    			else{
+   
     				articleDateAdd(n)
     				loadArticle(source, n)
-    			}
     		}
     	}
 	};
 	xhr.send()
+	}
 }
 
 var articleSource = localStorage.getItem("articleSource") || "articlesOfNote";
 localStorage.setItem("articleSource", articleSource)
 
 
-var articleDates = localStorage.getItem("articleDates") || JSON.stringify({"articlesOfNote" : `${dateAdd(new Date(), -3)}`, "essaysOpinions" : `${dateAdd(new Date(), -3)}`})
+var articleDates = localStorage.getItem("articleDates") || JSON.stringify({"articlesOfNote" : `${dateAdd(new Date(), -3)}`, "essaysOpinions" : `${dateAdd(new Date(), -3)}` , "science" : "0"})
 localStorage.setItem("articleDates", articleDates)
 
 var articleDate = JSON.parse(articleDates)[articleSource]
 
 function articleDateAdd(n){
-	articleDate = dateAdd(articleDate, n)
+	if(articleSource == "science"){
+		articleDate = parseInt(articleDate) + n*-1
+	}
+	else
+		articleDate = dateAdd(articleDate, n)
 	
 	let obj = JSON.parse(localStorage.getItem("articleDates"))
 	obj[articleSource] = articleDate
 	
 	localStorage.setItem("articleDates", JSON.stringify(obj))
 	articleDates  = localStorage.getItem("articleDates")
+console.log(localStorage)
 }
 
 if( document.location.pathname == "/app")

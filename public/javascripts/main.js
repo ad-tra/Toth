@@ -38,10 +38,10 @@ tl
 listens for changes theme mode(dark or light)
 */
 if(document.body.className == "dark"){
-	document.querySelector(".switch input").checked = true;
+	document.querySelector("#darkSwitch input").checked = true;
 }
 
-var drkModeCheck = document.querySelector(".switch input")
+var drkModeCheck = document.querySelector("#darkSwitch input")
 drkModeCheck.addEventListener("click", ()=>{
 	if(drkModeCheck.checked == true){
 		document.body.className = "dark"
@@ -83,55 +83,45 @@ if(window.location.pathname == "/"){
 }
 else
 {
-	var note = document.getElementById("note")
-	var essays = document.getElementById("essays")
 	
-	if(localStorage.getItem("articleSource") == "articlesOfNote"){
-		note.style.pointerEvents = "none"
-		note.style.opacity = "0.8"
-		document.title = "Toth- Articles of Note"
+	var lineCheck = document.querySelector("#lineSwitch input")
+	lineCheck.addEventListener("click", ()=>{
+	if(lineCheck.checked == true){
+		document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
 	}
-
-	if(localStorage.getItem("articleSource") == "essaysOpinions"){
-		essays.style.pointerEvents = "none"
-		essays.style.opacity = "0.8"
-		document.title = "Toth- Essays & Opinions"
+	else{
+		populateLine()
+		
 	}
-	//changes the source to articles of notes
-	note.addEventListener("click",()=>{
+})
 
+	var note = document.getElementById("articlesOfNote")
+	var essays = document.getElementById("essaysOpinions")
+	var science = document.getElementById("science")
 
-		articleSource = "articlesOfNote"
-		localStorage.setItem("articleSource", "articlesOfNote")
-		document.title = "Toth - Articles of Note"
-		note.style.pointerEvents = "none"
-		note.style.opacity = "0.8"
-
-		essays.style.pointerEvents = "inherit"
-		essays.style.opacity = "1"
-		
-		articleDate = JSON.parse(articleDates)[articleSource]
-		loadArticle(articleSource,-1)
+	document.querySelectorAll("#sources li div").forEach((el) =>{
+		if(el.id == localStorage.getItem("articleSource")){
+			el.className = "link-disabled"
+		}
 	})
-	
-	//changes the source to essays and opinions
-	essays.addEventListener("click",()=>{
-		articleSource = "essaysOpinions"
-		localStorage.setItem("articleSource", "essaysOpinions")
-		document.title = "Toth - Essays & Opinions"
-		
-		essays.style.pointerEvents = "none"
-		essays.style.opacity = "0.8"
 
-		note.style.pointerEvents = "inherit"
-		note.style.opacity = "1"
-		
-		articleDate = JSON.parse(articleDates)[articleSource]
-		loadArticle(articleSource, -1)
+	
+	document.querySelectorAll("#sources li div").forEach((el)=>{
+		el.addEventListener("click",()=>{ 
+			articleSource = el.id
+			localStorage.setItem("articleSource", articleSource)
+			
+			document.title = "Toth - " + articleSource
+			el.className = "link-disabled"
+			document.querySelectorAll("#sources li div").forEach((ele)=> {
+				if(ele.id != el.id) ele.className = "link"})
+			articleDate = JSON.parse(articleDates)[articleSource]
+
+			loadArticle(articleSource, -1)
+		})
 	})
-	
-	
 
+	
 	//next button
 	document.getElementById("next").addEventListener("click", () =>{
 		
@@ -141,13 +131,13 @@ else
 
 	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {	
-	
+		
 		articleDateAdd(1)
 		loadArticle(articleSource, 1)
 	})
 
 	//repopulates lines every time user changes window size
-	var el = document.querySelector(".article-main")
+/*	var el = document.querySelector(".article-main")
 	new ResizeObserver(()=>{
 		document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
 		try{
@@ -156,7 +146,7 @@ else
 		catch(e){
 			console.log("ResizeObserver malfunction")
 		}
-	}).observe(el)
+	}).observe(el)*/
 }
 
 

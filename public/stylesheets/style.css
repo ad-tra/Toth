@@ -42,7 +42,8 @@ body{
 
 .dark .container{
 	opacity: 0.65;
-	background: var(--gray)
+	background: var(--gray);
+	padding-left: 0.5em;
 }
 
 @font-face{
@@ -162,7 +163,7 @@ nav{
 	justify-content: space-around;
 	align-items:flex-end ;
 	width: 24%;
-	opacity: 0.8;
+
 }
 
 .nav-dropdown:hover .dropdown{
@@ -172,24 +173,25 @@ nav{
 }
 .dropdown{
     visibility: hidden;
+    list-style: none;
     display: flex;
+    z-index: 1;
     opacity: 0;
-    justify-content: space-between;
+    justify-content: space-around;
     position: absolute;
     transform: translate(-87px ,0.2px);
     width: 17em;
-    height: 7.5em;
+   height: 14em;
     align-content: center;
     padding: 1em 1em 1em 1em;
-    flex-direction: column;
-    flex-wrap: nowrap;
+    flex-flow: column nowrap;
     background-color: var(--gray);
     border-top: 0.3em solid var(--blue);
     transition: opacity .25s ease-out;
+    box-shadow: -7px 10px 0px 0px var(--dark-gray);
 }
 
 .dropdown-option{
-
 	display: flex;
 	align-items: center;
 }
@@ -204,7 +206,6 @@ nav{
 	margin-left: 0.5em;
     font-size: 1.3em;
     user-select: none;
-    color: var(--black);
 }
 
 .nav-links a{
@@ -482,7 +483,7 @@ article{
     font-size: 1.2em;
     text-indent: 1em;
     /*width: 43;*/
-    line-height: 24px;
+    line-height: 27px;
 }
 article section{
 	width: 43%;
@@ -490,7 +491,7 @@ article section{
 }
 .line-num p {
 	font-style: italic;
-	padding-top: 96px;
+	padding-top: 108px;
 	color: #aaa;
 	padding-right: 5px;
 }
@@ -518,7 +519,7 @@ font-family: 'doris-pp';
     background: linear-gradient( to bottom, var(--blue) 0%, var(--blue) 100% );
     background-position: 0 100%;
     background-repeat: repeat-x;
-    background-size: 2.5px 2.5px;
+    background-size: 2.5px 3px;
     color: var(--black);
     transition: background-size 0.25s;
     background-color: var(--dark-gray);
@@ -531,6 +532,13 @@ font-family: 'doris-pp';
 .link:focus {
 	outline: none;
 }
+.link-disabled{
+background: var(--dark-gray);
+opacity:0.7;
+color: var(--black);
+pointer-events: none
+}
+
 #get-article{
 	display: flex;
     align-items: center;
