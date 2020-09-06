@@ -1,37 +1,29 @@
+var tl = gsap.timeline()
 //intro animation for the index page
-const tl = gsap.timeline()
-function indexIntro(){
-tl
-.from('.background-pattern', {
-	opacity: 0,
-		duration: 1.3,
-		ease: "power1",
-})
-.to('.left-panel', 
-	{
+function indexIntro(){ 
+gsap.defaults({duration:1})
+tl.from('.left-panel', {autoAlpha:0, y:25, ease:"power3", delay:0.3})
+.from('.button-pattern', {autoAlpha:0, y:-50, ease:"power2",delay:0.1},"-=.9")
+.from('.button', {autoAlpha:0,x: 50,ease: "power2",delay:0.1},"-=.9")
+}
+//shorter than intro by 0.5
+function indexOutro(){
+tl.to('.left-panel', {autoAlpha:0,duration:0.5, y:25, ease:"power3",})
+.to('.button',{autoAlpha:0, x:50, duration:0.5,ease:"power2",}, "-=0.5")
+.to('.button-pattern', {autoAlpha:0,y: -50,duration:0.5,ease: "power2",}, "-=0.7")
 
-		autoAlpha:1,
-		duration: 1,
-		y: -25, 
-		ease: "power3",
-		delay:0.3
-	}, "-=0.8")
+}
+//intro animation for the app page
+function appIntro(){
+tl.from("#banner" ,{duration: 0.6,opacity: 0,y:'-50%'})
+tl.from(".description-top, .description-bottom", {duration: 0.6, opacity:0, x:-25, stagger:0.2,}, "=-0.4")
+tl.from("article", {duration: 0.6,opacity:0, y: 25}, "=-0.4")
+}
 
-.from('.button-pattern', 
-	{
-		autoAlpha:0,
-		duration: 1,
-		y: -50,
-		ease: "power2",
-	}, "-=.9")
-
-.from('.button', 
-	{
-		autoAlpha:0,
-		duration: 1,
-		x: 50,
-		ease: "power2",
-	}, "-=.9");
+function appOutro(){
+tl.to("#banner" ,{duration: 0.3, opacity: 0,y:'-25%'})
+tl.to(".description-top, .description-bottom", {duration: 0.3,opacity:0, x:-25, stagger:0.2,}, "=-0.5")
+tl.to("article", {duration: 0.3,opacity:0, y: 25}, "=-0.5")
 }
 
 /*
@@ -75,25 +67,29 @@ accentCheck.addEventListener("click", () =>{
 	}
 })
 
-
-
-//plays the intro animation if it is the index page
-if(window.location.pathname == "/"){
+//incase a hard refresh overrides baraba navigation 
+if(document.location.pathname =="/app"){
+	appContentLoad()
+	appIntro()
+}
+else{
+	//for the index page
 	indexIntro()
 }
-else
-{
+function appContentLoad(){
+	loadArticle(articleSource, -1, false)
 	
-	var lineCheck = document.querySelector("#lineSwitch input")
+	
+	/*var lineCheck = document.querySelector("#lineSwitch input")
 	lineCheck.addEventListener("click", ()=>{
-	if(lineCheck.checked == true){
-		document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
-	}
-	else{
+		if(lineCheck.checked == true){
+			document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
+		}
+		else{
 		populateLine()
 		
-	}
-})
+		}
+	})*/
 
 	var note = document.getElementById("articlesOfNote")
 	var essays = document.getElementById("essaysOpinions")
@@ -117,27 +113,23 @@ else
 				if(ele.id != el.id) ele.className = "link"})
 			articleDate = JSON.parse(articleDates)[articleSource]
 
-			loadArticle(articleSource, -1)
+			loadArticle(articleSource, -1, false)
 		})
 	})
 
-	
 	//next button
 	document.getElementById("next").addEventListener("click", () =>{
-		
 		articleDateAdd(-1)
-		loadArticle(articleSource, -1)
+		loadArticle(articleSource, -1, true)
 	})
 
-	//back button goes back in history 
 	document.getElementById("back").addEventListener("click", () => {	
-		
 		articleDateAdd(1)
-		loadArticle(articleSource, 1)
+		loadArticle(articleSource, 1, true)
 	})
 
 	//repopulates lines every time user changes window size
-/*	var el = document.querySelector(".article-main")
+	var el = document.querySelector(".article-main")
 	new ResizeObserver(()=>{
 		document.querySelectorAll(".line-num").forEach((element) => element.innerHTML ="")
 		try{
@@ -146,16 +138,51 @@ else
 		catch(e){
 			console.log("ResizeObserver malfunction")
 		}
-	}).observe(el)*/
+	}).observe(el)
 }
 
 
 
+barba.init({
+	debug: true,
+	
+	transitions: [{
+		from:{
+			namespace: ['index']
+		},
+		enter(){
+			appIntro()
+			appContentLoad()
+		},
 
+		leave(){
+			const done = this.async();
+			//reverse
+			indexOutro()
+			 setTimeout(function() {
+                done();
+            }, 200);
+		}		
+	},
+	{
+		from:{
+			namespace: ['app']
+		},
+		 leave(){
+			console.log("leave")
+			const done = this.async()
+			appOutro()
+			setTimeout(function() {
+                done();
+            }, 300);
 
+		},
+		enter(){
+		indexIntro()
+			
+		}	
+	}
 
-
-
-
-
+	]
+})
 

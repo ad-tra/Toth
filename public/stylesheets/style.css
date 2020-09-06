@@ -6,8 +6,14 @@
 	text-decoration: none;
 }
 body{
+	overflow-x: hidden;
 	background: var(--white);
 }
+::selection {
+  color: var(--gray);
+  background: var(--dark-blue);
+}
+
 .light{
 	--black: #231F20 ;
 	--blue: #0E4A82;
@@ -171,6 +177,9 @@ nav{
 	opacity: 1;
 	visibility: visible;
 }
+#sources{
+	height: 14em;
+}
 .dropdown{
     visibility: hidden;
     list-style: none;
@@ -181,7 +190,7 @@ nav{
     position: absolute;
     transform: translate(-87px ,0.2px);
     width: 17em;
-   height: 14em;
+   height: 9em;
     align-content: center;
     padding: 1em 1em 1em 1em;
     flex-flow: column nowrap;
@@ -253,7 +262,7 @@ main{
 	width: 35em;
 	margin-left: 12%;
 	font-family: 'freesans';
-	opacity:0;
+	visibility: hidden;
 }
 
 .left-panel h1{
@@ -264,7 +273,7 @@ main{
 	height:1.23em;
 	border-bottom: 0.12em solid var(--blue);
 	border-top: 0.12em solid var(--blue);
-	
+
 }
 
 .left-panel h2{
@@ -469,6 +478,7 @@ html.is-animating .transition-fade {
 	font-weight: 100;
 	font-size: 1.25em;
 	margin-bottom: 1em;
+	
 }
 
 article{
@@ -582,7 +592,7 @@ pointer-events: none
 	margin-top: 0.5em !important;
 }
 .loader-container{
-	display: inherit;
+	display: none;
 }
 .loader{
 	display: flex;
