@@ -1,4 +1,3 @@
-
 if(localStorage.getItem("theme"))
 	document.body.className = localStorage.getItem("theme")
 if(localStorage.getItem("accent"))
@@ -47,27 +46,18 @@ function populateRes(response){
 
 
 
-function loadArticle(source, n, scroll){
+function loadArticle(source, n, scrollBoolean){
 		
 	var xhr = new XMLHttpRequest()
 	xhr.open("GET", `/${source}?date=${articleDate}`, true)
-	xhr.responseType = 'text';
-    console.log(document.querySelector(".pagination") != null && scroll)
-    if(document.querySelector(".pagination") != null ){
+	//replace this by animation that shows loader animation regardless of scroll conditions
+	// attach a delay to unhamper visuals when article is cached 
 		document.querySelector(".pagination").style.display = "none"
-		if(scroll == true)
 		document.querySelector(".loader-container").style.display = "inherit"	
 		document.querySelector("article").style.display = "none"
-    }
-	
-	if(n == 1 && (new Date(articleDate).getTime() >= new Date(dateAdd(new Date(), -3)).getTime() || articleDate < 0)){
-		document.location.href = "/" 
-    	articleDateAdd(-1)
-    	return null
-    }
-    else{ 
+
 	xhr.onload = function () {
-    	if (xhr.readyState === xhr.DONE) {
+    	if (xhr.readyState === 4) {
         	if (xhr.status === 200 || xhr.status === 304) {
             	
             	var response = JSON.parse(xhr.response)
@@ -75,27 +65,26 @@ function loadArticle(source, n, scroll){
             	document.querySelector("article").style.display = "flex"
             	populateRes(response)
         		
+        		//outro animeation 
         		document.querySelector(".loader-container").style.display = "none"
-        		document.querySelector(".pagination").style.display = "flex"
-        		if(scroll)
-        			document.querySelector(".article-main").scrollIntoView({ behavior: 'smooth', block: 'start'})
-        	}
-    		
-    		if(xhr.status === 500){
-   
-    				articleDateAdd(n)
-    				loadArticle(source, n)
+        		document.querySelector(".pagination").style.display = "flex"        			
+        	}else{
+    			articleDateAdd(n)
+    			loadArticle(source, n)
     		}
     	}
 	};
 	
 	xhr.send()
-	}
+    if(scrollBoolean){
+        setTimeout(()=>{
+        	document.querySelector(".article-main").scrollIntoView({ behavior: 'auto',inline: 'nearest', block: 'start'})
+        },100)
+    }
 }
 
 var articleSource = localStorage.getItem("articleSource") || "articlesOfNote";
 localStorage.setItem("articleSource", articleSource)
-
 
 var articleDates = localStorage.getItem("articleDates") || JSON.stringify({"articlesOfNote" : `${dateAdd(new Date(), -3)}`, "essaysOpinions" : `${dateAdd(new Date(), -3)}` , "science" : "0"})
 localStorage.setItem("articleDates", articleDates)
@@ -103,9 +92,8 @@ localStorage.setItem("articleDates", articleDates)
 var articleDate = JSON.parse(articleDates)[articleSource]
 
 function articleDateAdd(n){
-	if(articleSource == "science"){
+	if(articleSource == "science")
 		articleDate = parseInt(articleDate) + n*-1
-	}
 	else
 		articleDate = dateAdd(articleDate, n)
 	
@@ -114,6 +102,5 @@ function articleDateAdd(n){
 	
 	localStorage.setItem("articleDates", JSON.stringify(obj))
 	articleDates  = localStorage.getItem("articleDates")
-console.log(localStorage)
 }
 

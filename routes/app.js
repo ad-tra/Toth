@@ -74,7 +74,7 @@ router.get("/science", cacheMiddleware("sciencePassages"), async (req, res) =>{
     articleDate = req.query.date
   try{ 
     var docs = await scraper.scrapeScience(articleDate)
-    await res.send(docs)
+    res.send(docs)
   }
   catch(e){
     res.status(500).send(null);

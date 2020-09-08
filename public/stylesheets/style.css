@@ -2,18 +2,20 @@
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
-
 	text-decoration: none;
+	font-weight: 400;
+
+
 }
 body{
 	overflow-x: hidden;
 	background: var(--white);
+		-moz-osx-font-smoothing: grayscale;
 }
 ::selection {
   color: var(--gray);
-  background: var(--dark-blue);
+  background: var(--blue);
 }
-
 .light{
 	--black: #231F20 ;
 	--blue: #0E4A82;
@@ -569,18 +571,6 @@ pointer-events: none
 	margin-top: 1em;
 	text-align: center;
 }
-.dash{
-	background-color: var(--blue);
-	width: 4em;
-	height: 1em;
-	float: right;
-	position: relative;
-	bottom: 5em;
-	right:5em;
-}
-.dash:hover{
-	background-color: var(--dark-blue)
-}
 
 .pagination{
 	display: none;
@@ -593,6 +583,15 @@ pointer-events: none
 }
 .loader-container{
 	display: none;
+	opacity: 0;
+	animation: fade 1s;
+	animation-delay: 0.5s;
+	animation-fill-mode: both;
+}
+@keyframes fade {
+	from{opacity: 0;}
+	to {opacity: 1;}
+	
 }
 .loader{
 	display: flex;

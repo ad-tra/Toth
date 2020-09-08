@@ -30,7 +30,6 @@ async function scrape(articleType ,date){
 		 await browser.close();
 	}
 }
-
 async function scrapeScience(unformNum){
 	const browser = await puppeteer.launch({headless: true});
 	try{
