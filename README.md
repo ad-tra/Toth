@@ -41,10 +41,10 @@ To get this running on your local machine:
 Finally, Visit the website at [http://localhost:3000/](http://localhost:3000/)
 
 ## Built With
-Node, Express, Puppeteer, and EJS
+Node, Express, Puppeteer, and Barba
 * [Node.js](https://nodejs.org/en/)
 * [Express](https://www.express.com/)
-* [EJS](https://ejs.co/)
+* [Barba](https://github.com/barbajs/barba)
 * [Puppeteer](https://github.com/puppeteer/puppeteer)
 ## 
 this project was created for personal use, but I'm delighted to help others achieve their desired score. Still, the app is very *beta* and unfinished. If you found any **bugs**, **issues** or you would like to help with development feel free to contact me 
