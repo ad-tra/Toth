@@ -29,7 +29,9 @@ document.querySelector(".line-num p").style.paddingTop = document.querySelector(
 
 
 function populateRes(response){
+	
 	var article = response.content
+	console.log(response.content)
 	var mid = article.substring(parseInt(article.length/2)).indexOf(" ")+parseInt(article.length/2) 
 	var link = new URL(response.link)
 	var discrp = response.discrp

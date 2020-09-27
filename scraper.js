@@ -1,4 +1,3 @@
-
 var puppeteer = require('puppeteer');
 
 async function scrape(articleType ,date){
