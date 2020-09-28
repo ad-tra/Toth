@@ -49,13 +49,15 @@ router.get("/articlesOfNote", cacheMiddleware("articlesOfNote"), async (req, res
     var docs = await scraper.scrape(0,articleDate)
     await res.send(docs)
   }
-  catch(e){
+  catch(err){
+    console.log(err)
     res.status(500).send(null);
+    
   }
 })
 
 
-router.get("/essaysOpinions", cacheMiddleware("essaysOpinions"), async (req, res) =>{
+router.get("/essaysOpinions", cacheMiddleware("articlesOfNote"), async (req, res) =>{
   
   if(req.query.date)
     articleDate = req.query.date
@@ -63,12 +65,14 @@ router.get("/essaysOpinions", cacheMiddleware("essaysOpinions"), async (req, res
     var docs = await scraper.scrape(2,articleDate)
     await res.send(docs)
   }
-  catch(e){
+  catch(err){
+    console.log(err)
     res.status(500).send(null);
+    
   }
 })
 
-router.get("/science", cacheMiddleware("sciencePassages"), async (req, res) =>{
+router.get("/science", cacheMiddleware("articlesOfNote"), async (req, res) =>{
   
   if(req.query.date)
     articleDate = req.query.date
@@ -76,8 +80,10 @@ router.get("/science", cacheMiddleware("sciencePassages"), async (req, res) =>{
     var docs = await scraper.scrapeScience(articleDate)
     res.send(docs)
   }
-  catch(e){
+  catch(err){
+    console.log(err)
     res.status(500).send(null);
+   
   }
 })
 

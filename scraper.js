@@ -1,5 +1,25 @@
 var puppeteer = require('puppeteer');
+var { Readability } = require('@mozilla/readability');
+var JSDOM = require('jsdom').JSDOM;
 
+function purifyContent(a){
+	var doc = new JSDOM(a);
+	let reader = new Readability(doc.window.document);
+	var rowArticle = reader.parse().content
+	var rowArticleDoc = new JSDOM(rowArticle)
+	var result = ""
+	var rowArticleChilds = rowArticleDoc.window.document.querySelector("#readability-page-1 div ").childNodes;
+
+	for(let i = 0; i<rowArticleChilds.length; i++){
+		console.log(rowArticleChilds[i].tagName == "P")
+		if(rowArticleChilds[i].tagName == "P"){
+			result = result + "<p>"+ rowArticleChilds[i].innerHTML + "</p>"
+		}
+	}
+
+
+	return result;
+}
 async function scrape(articleType ,date){
 	const browser = await puppeteer.launch({headless: true});
 	try{
@@ -22,7 +42,8 @@ async function scrape(articleType ,date){
 		}
 
 		//returns the scraped article 
-		var str = {"content": text,"date": date,"link": tlink,"discrp": tdiscrp.substring(tdiscrp.indexOf("|")+1, tdiscrp.length-9),"visibility": "unseen"}	
+		var str = {"content": purifyContent(await page.evaluate(()=>{return document.body.innerHTML;})),"date": date,"link": tlink,"discrp": tdiscrp.substring(tdiscrp.indexOf("|")+1, tdiscrp.length-9),"visibility": "unseen"}	
+		console.log(str);
 		return str;
 	}
 	finally{
@@ -57,7 +78,8 @@ async function scrapeScience(unformNum){
 		}
 		
 
-		var str = {"content": text,"date": tdate,"link": tlink,"discrp": tdiscrp,"visibility": "unseen"}	
+		var str = {"content": purifyContent(await page.evaluate(()=>{return document.body.innerHTML;})),"date": tdate,"link": tlink,"discrp": tdiscrp,"visibility": "unseen"}	
+		console.log(str)
 		return str;
 
 	}
