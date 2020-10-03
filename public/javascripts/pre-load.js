@@ -31,7 +31,6 @@ document.querySelector(".line-num p").style.paddingTop = document.querySelector(
 function populateRes(response){
 	
 	var article = response.content
-	console.log(response.content)
 	var mid = article.substring(parseInt(article.length/2)).indexOf(" ")+parseInt(article.length/2) 
 	var link = new URL(response.link)
 	var discrp = response.discrp
@@ -60,7 +59,7 @@ function loadArticle(source, n, scrollBoolean){
 
 	xhr.onload = function () {
     	if (xhr.readyState === 4) {
-        	if (xhr.status === 200 || xhr.status === 304) {
+        	if (xhr.status === 200) {
             	
             	var response = JSON.parse(xhr.response)
             	

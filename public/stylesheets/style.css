@@ -12,6 +12,7 @@ body{
 	background: var(--white);
 		-moz-osx-font-smoothing: grayscale;
 }
+
 ::selection {
   color: var(--gray);
   background: var(--blue);
@@ -22,7 +23,7 @@ body{
 	--gray:#E6E7E9;
 	--dark-gray:#CECFD1;
 	--dark-blue:#093156 ;
-	--white: #e6e7e9a8;
+	--white: #ffffff;
 }
 .dark{
 --black: #E6E7E9 ;
@@ -496,6 +497,10 @@ article{
     text-indent: 1em;
     /*width: 43;*/
     line-height: 27px;
+}
+.article-main a{
+	color: var(--black);
+	text-decoration: underline;
 }
 article section{
 	width: 43%;

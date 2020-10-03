@@ -2,94 +2,70 @@ var puppeteer = require('puppeteer');
 var { Readability } = require('@mozilla/readability');
 var JSDOM = require('jsdom').JSDOM;
 
+//method to purify text form the dom of a publishing website. Needs revision for better effeciancy
 function purifyContent(a){
+
 	var doc = new JSDOM(a);
-	let reader = new Readability(doc.window.document);
-	var rowArticle = reader.parse().content
-	var rowArticleDoc = new JSDOM(rowArticle)
-	var result = ""
-	var rowArticleChilds = rowArticleDoc.window.document.querySelector("#readability-page-1 div ").childNodes;
+	let reader = new Readability(doc.window.document)
+	doc = new JSDOM(reader.parse().content)
+	
+	var externalities = ["img", "figure", "#newsletter-interstitial-div"] 
+	externalities.forEach((externality)=>{
+		doc.window.document.querySelectorAll(externality).forEach((e)=>{e.remove()})
+	})
 
-	for(let i = 0; i<rowArticleChilds.length; i++){
-		console.log(rowArticleChilds[i].tagName == "P")
-		if(rowArticleChilds[i].tagName == "P"){
-			result = result + "<p>"+ rowArticleChilds[i].innerHTML + "</p>"
-		}
-	}
-
-
-	return result;
+	var result = "";
+	doc.window.document.querySelectorAll("p").forEach((eP) =>{
+		result = result + '<p>' + eP.innerHTML + '</p>'
+	})
+	return result
 }
+//articletype=0 (articles of note), 2(essays & opinions), 3(science)
 async function scrape(articleType ,date){
 	const browser = await puppeteer.launch({headless: true});
 	try{
-		const url = `https://www.aldaily.com/archives/${date}`
 		const page = await browser.newPage();
 		page.setDefaultTimeout(15000)
-		await page.goto(url)
 
-		//aldaily page(in the future limit the time wait in order to detect weekends)
-		await page.waitForXPath("//a[contains(text(),'more')]")
-		const tlink = await page.evaluate(`document.querySelectorAll('.mobile-front p a')[${articleType}].getAttribute('href')`)
-		const tdiscrp = await page.evaluate(`document.querySelectorAll('.mobile-front p')[${articleType}].innerText`)
-		await page.goto(tlink)
+		if(articleType<=2){
+			await page.goto(`https://www.aldaily.com/archives/${date}`)
+			
+			//aldaily page(in the future limit the time wait in order to detect weekends)
+			await page.waitForXPath("//a[contains(text(),'more')]")
+			var tlink = await page.evaluate(`document.querySelectorAll('.mobile-front p a')[${articleType}].getAttribute('href')`)
+			var tdiscrp = await page.evaluate(`document.querySelectorAll('.mobile-front p')[${articleType}].innerText`)
+			tdiscrp = tdiscrp.substring(tdiscrp.indexOf("|")+1, tdiscrp.length-9)	
 
-		//the article's publisher page
-		await page.waitForXPath("//p[contains(text(),'the')]")
-		var text = ""
-		for(let paragraph of await page.$x("//p[string-length() > 100]")){
-			text = text+ "<p>" +await page.evaluate(element => element.textContent, paragraph)+ "</p>";
+			await page.goto(tlink)			
+			//the article's publisher page
+			await page.waitForXPath("//p[contains(text(),'the')]")
+
+
+		}else {
+			var pageQuery = parseInt(date / 16)
+			var linkIndex = date -(pageQuery *16)
+
+			await page.goto(`https://www.sciencemag.org/category/biology?page=${pageQuery}`)
+			
+			var tlink = "https://www.sciencemag.org" + await page.evaluate(`document.querySelectorAll('.media__headline a')[${linkIndex}].getAttribute('href')`)
+			var tdiscrp = await page.evaluate(`document.querySelectorAll('.media__headline')[${linkIndex}].textContent` )
+			tdiscrp = tdiscrp + await page.evaluate(`document.querySelectorAll('.media__deck')[${linkIndex}].textContent` )
+			//var date = await page.evaluate(`document.querySelectorAll('time')[1].textContent`)
+		
+			await page.goto(tlink)
 		}
-
-		//returns the scraped article 
-		var str = {"content": purifyContent(await page.evaluate(()=>{return document.body.innerHTML;})),"date": date,"link": tlink,"discrp": tdiscrp.substring(tdiscrp.indexOf("|")+1, tdiscrp.length-9),"visibility": "unseen"}	
-		console.log(str);
-		return str;
+		
+		 return {"type":articleType, "content": purifyContent(await page.evaluate(()=>{return document.body.innerHTML;})),"date": date,"link": tlink,"discrp": tdiscrp}
+	}
+	catch(err){
+		return {"type":articleType, "content": null, "date": date}
 	}
 	finally{
 		 await browser.close();
 	}
 }
-async function scrapeScience(unformNum){
-	const browser = await puppeteer.launch({headless: true});
-	try{
-		var pageQuery = parseInt(unformNum / 16)
-		var linkIndex = unformNum -(pageQuery *16)
-		
-		const page = await browser.newPage()
-		page.setDefaultTimeout(20000)
-		await page.goto(`https://www.sciencemag.org/category/biology?page=${pageQuery}`)
-
-		var tlink = "https://www.sciencemag.org" + await page.evaluate(`document.querySelectorAll('.media__headline a')[${linkIndex}].getAttribute('href')`)
-		
-		var tdiscrp = await page.evaluate(`document.querySelectorAll('.media__headline')[${linkIndex}].textContent` )
-		tdiscrp = tdiscrp + await page.evaluate(`document.querySelectorAll('.media__deck')[${linkIndex}].textContent` )
-
-		var tdate = await page.evaluate(`document.querySelectorAll('time')[1].textContent`)
-		
-		await page.goto(tlink)
-		var text = ""
-		for(let paragraph of await page.$x("//div[contains(@class, 'article__body')]/p[not(contains(text(), 'SIGN'))]")){
-			var textTemp = await page.evaluate(element => element.innerText, paragraph)
-			if(textTemp.indexOf("SIGN") > 0){
-				textTemp = textTemp.substring(0,textTemp.indexOf("SIGN"))
-			}
-			text = text+ "<p>" +textTemp+ "</p>";
-		}
-		
-
-		var str = {"content": purifyContent(await page.evaluate(()=>{return document.body.innerHTML;})),"date": tdate,"link": tlink,"discrp": tdiscrp,"visibility": "unseen"}	
-		console.log(str)
-		return str;
-
-	}
-	finally{
-		await browser.close()
-	}
-
-}
 
 module.exports = {
-	scrape: scrape,
-	scrapeScience: scrapeScience
+	scrape: scrape
 }
+	
