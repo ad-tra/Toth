@@ -6,7 +6,7 @@
     "start": "pm2 start ./bin/www",
     "dev": "nodemon ./bin/www",
     "test": "jest",
-    "kill" : "pm2 stop www"
+    "stop" : "pm2 stop www"
   },
   "dependencies": {
     "@mozilla/readability": "^0.3.0",
