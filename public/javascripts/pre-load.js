@@ -82,9 +82,14 @@ function populateArticle(response){
 
 
 
+var counter = 0;
+function loadArticle(n, scrollBoolean, errCount){
+	if(errCount > 10){
+		localStorage.clear()
+		location.reload()
+		return;
+	} 
 
-function loadArticle(n, scrollBoolean){
-		
 	var xhr = new XMLHttpRequest()
 	xhr.open("GET", `/${articleSource}?date=${articleDate}`, true)
 	//replace this by animation that shows loader animation regardless of scroll conditions
@@ -98,19 +103,17 @@ function loadArticle(n, scrollBoolean){
         	if (xhr.status === 200) {
             	
             	var response = JSON.parse(xhr.response)
-            	
             	document.querySelector("article").style.display = "flex"
             	populateArticle(response)
-        		
         		//outro animeation 
         		document.querySelector(".loader-container").style.display = "none"
 				document.querySelector(".pagination").style.display = "flex" 
-				
+				//make links from scraped content open in a new window
 				document.querySelector('article').querySelectorAll('a').forEach((el)=>{el.setAttribute('target', '_blank')})       			
 			
 			}else{
     			articleDateAdd(-1)
-    			loadArticle(n,scrollBoolean)
+    			loadArticle(n,scrollBoolean, counter++)
     		}
     	}
 	};

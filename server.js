@@ -7,7 +7,7 @@ var indexRouter = require('./routes/index');
 var appRouter = require('./routes/app');
 
 //var logger = require('morgan');
-
+console.log(process.env.TEST)
 var app = express();
 
 // view engine setup
