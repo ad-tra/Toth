@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "test": "jest"
+    "start": "pm2 start ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "test": "jest",
+    "kill" : "pm2 stop www"
   },
   "dependencies": {
     "@mozilla/readability": "^0.3.0",
@@ -17,7 +19,8 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jsdom": "^16.4.0",
-    "mongoose": "^5.10.7"
+    "mongoose": "^5.10.7",
+    "pm2": "^4.5.0"
   },
   "devDependencies": {
     "jest": "^26.6.3",
