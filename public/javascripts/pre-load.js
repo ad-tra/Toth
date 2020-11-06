@@ -1,11 +1,27 @@
+
 if(localStorage.getItem("theme"))
 	document.body.className = localStorage.getItem("theme")
 if(localStorage.getItem("accent"))
 	document.body.id = localStorage.getItem("accent")
 
 function dateAdd(date, i){
-	var newDate=  new Date(new Date(date).getTime() + i*24*60*60*1000);
-	return `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`
+	let newDate = moment(date).add(i,'days')
+	if(newDate.day() == 0) i>=0 ? newDate.add(1, 'days') :  newDate.add(-1, 'days')
+	return newDate.format('YYYY-MM-DD')
+}
+function articleDateAdd(n){
+	if(articleSource == "science" || articleSource == "history")
+		articleDate = parseInt(articleDate) + n*-1
+	else{
+		articleDate = dateAdd(articleDate, n)
+	}
+		
+	
+	let obj = JSON.parse(localStorage.getItem("articleDates"))
+	obj[articleSource] = articleDate
+	
+	localStorage.setItem("articleDates", JSON.stringify(obj))
+	articleDates  = localStorage.getItem("articleDates")
 }
 
 function populateLine(){ 
@@ -28,18 +44,38 @@ document.querySelector(".line-num p").style.paddingTop = document.querySelector(
 }
 
 
-function populateRes(response){
-	
-	var article = response.content
-	var mid = article.substring(parseInt(article.length/2)).indexOf(" ")+parseInt(article.length/2) 
-	var link = new URL(response.link)
-	var discrp = response.discrp
-	var date = response.date
-	var choices = [1,10,11,21,22,31,32,41,42,52]; 
-	let i = 2*parseInt(Math.random()*choices.length/2)
 
-	document.querySelectorAll(".article-main")[0].innerHTML = `<h1 class= "instructions">Questions ${choices[i]}-${choices[i+1]} are based on the following passage.</h1><h3 class= "article-intro">This passage is from <a class= "link" target = "_blank" rel="noopener" href = "${link}"> ${link.host}</a> ${discrp} Fetched from adaily.com, on ${date}</h3> ${article.substring(0,mid)}`
-	document.querySelectorAll(".article-main")[1].innerHTML = article.substring(mid)
+function halfTextFromHTML(textHTML, text){
+	let j = 1, counter = 0, midHTML = 0, tempHTML = -1, 
+	midText = text.substring(parseInt(text.length/2)).indexOf(" ")+ parseInt(text.length/2) 
+	
+	while(midHTML>-1){
+		midHTML = textHTML.indexOf(text.substring(midText, midText+j))
+		
+		if(counter > 10) return tempHTML; 
+		
+		if(tempHTML == midHTML) counter++
+		else{
+			tempHTML = midHTML
+			counter = 0
+		}    
+	j++
+	}
+	return midText; 
+	
+}
+
+
+function populateArticle(response){
+	
+	var mid = halfTextFromHTML(response.content, new DOMParser().parseFromString(response.content, "text/html").body.textContent) 
+
+	var link = new URL(response.link)
+	var choices = [1,10,11,21,22,31,32,41,42,52]; 
+	let i = 2* parseInt(Math.random()*choices.length/2)
+
+	document.querySelectorAll(".article-main")[0].innerHTML = `<h1 class= "instructions">Questions ${choices[i]}-${choices[i+1]} are based on the following passage.</h1><h3 class= "article-intro">This passage is from <a class= "link" target = "_blank" rel="noopener" href = "${new URL(response.link)}"> ${link.host}</a> ${response.discrp}.</h3> ${response.content.substring(0, mid)}`
+	document.querySelectorAll(".article-main")[1].innerHTML = response.content.substring(mid)
 	
 	populateLine()
 }
@@ -47,10 +83,10 @@ function populateRes(response){
 
 
 
-function loadArticle(source, n, scrollBoolean){
+function loadArticle(n, scrollBoolean){
 		
 	var xhr = new XMLHttpRequest()
-	xhr.open("GET", `/${source}?date=${articleDate}`, true)
+	xhr.open("GET", `/${articleSource}?date=${articleDate}`, true)
 	//replace this by animation that shows loader animation regardless of scroll conditions
 	// attach a delay to unhamper visuals when article is cached 
 		document.querySelector(".pagination").style.display = "none"
@@ -64,14 +100,17 @@ function loadArticle(source, n, scrollBoolean){
             	var response = JSON.parse(xhr.response)
             	
             	document.querySelector("article").style.display = "flex"
-            	populateRes(response)
+            	populateArticle(response)
         		
         		//outro animeation 
         		document.querySelector(".loader-container").style.display = "none"
-        		document.querySelector(".pagination").style.display = "flex"        			
-        	}else{
-    			articleDateAdd(n)
-    			loadArticle(source, n)
+				document.querySelector(".pagination").style.display = "flex" 
+				
+				document.querySelector('article').querySelectorAll('a').forEach((el)=>{el.setAttribute('target', '_blank')})       			
+			
+			}else{
+    			articleDateAdd(-1)
+    			loadArticle(n,scrollBoolean)
     		}
     	}
 	};
@@ -84,24 +123,13 @@ function loadArticle(source, n, scrollBoolean){
     }
 }
 
-var articleSource = localStorage.getItem("articleSource") || "articlesOfNote";
+var articleSource = localStorage.getItem("articleSource") || "history";
 localStorage.setItem("articleSource", articleSource)
 
-var articleDates = localStorage.getItem("articleDates") || JSON.stringify({"articlesOfNote" : `${dateAdd(new Date(), -3)}`, "essaysOpinions" : `${dateAdd(new Date(), -3)}` , "science" : "0"})
+var articleDates = localStorage.getItem("articleDates") || JSON.stringify({"articlesOfNote" : `${dateAdd(new Date(), -3)}`, "essaysOpinions" : `${dateAdd(new Date(), -3)}` , "science" : "0", "history": "16"})
 localStorage.setItem("articleDates", articleDates)
 
 var articleDate = JSON.parse(articleDates)[articleSource]
 
-function articleDateAdd(n){
-	if(articleSource == "science")
-		articleDate = parseInt(articleDate) + n*-1
-	else
-		articleDate = dateAdd(articleDate, n)
-	
-	let obj = JSON.parse(localStorage.getItem("articleDates"))
-	obj[articleSource] = articleDate
-	
-	localStorage.setItem("articleDates", JSON.stringify(obj))
-	articleDates  = localStorage.getItem("articleDates")
-}
+
 

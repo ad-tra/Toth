@@ -3,24 +3,23 @@ var tl = gsap.timeline()
 function indexIntro(){ 
 	gsap.defaults({duration:1})
 	tl
-	.from('.left-panel', {autoAlpha:0, y:25, ease:"power3", delay:0.3})
+	.from('.left-panel, .right-panel h2', {autoAlpha:0, y:25, ease:"power3", delay:0.3})
 	.from('.button-pattern', {autoAlpha:0, y:-50, ease:"power2",delay:0.1},"-=.9")
 	.from('.button', {autoAlpha:0,x: 50,ease: "power2",delay:0.1},"-=.9")
 }
 //shorter than intro by 0.5
 function indexOutro(){
 	tl
-	.to('.left-panel', {autoAlpha:0,duration:0.5, y:25, ease:"power3",})
-	.to('.button',{autoAlpha:0, x:50, duration:0.5,ease:"power2",}, "-=0.5")
-	.to('.button-pattern', {autoAlpha:0,y: -50,duration:0.5,ease: "power2",}, "-=0.7")
+	.to('.left-panel, .right-panel h2', {autoAlpha:0,duration:0.5, y:25, ease:"power3"})
+	.to('.button',{autoAlpha:0, x:50, duration:0.5,ease:"power2",}, "-=0.45")
+	.to('.button-pattern', {autoAlpha:0,y: -50,duration:0.5,ease: "power2",}, "-=0.45")
 
 }
 //intro animation for the app page
 function appIntro(){
 	tl
-	.from("#banner" ,{duration: 0.6,opacity: 0,y:'-50%'})
-	.from(".description-top, .description-bottom", {duration: 0.6, opacity:0, x:-25, stagger:0.2,}, "=-0.4")
-	.from("article", {duration: 0.6,opacity:0, y: 25}, "=-0.4")
+	.from("#banner, .description-top, .description-bottom" ,{duration: 0.6,opacity: 0, x: -20})
+	.from("article", {duration: 0.5,opacity:0, x: 5}, "-=0.4")
 
 }
 
@@ -84,35 +83,37 @@ document.querySelectorAll("#sources li div").forEach((el) =>{
 			if(document.location.pathname == "/"){
 				document.querySelector(".button").click()
 			}
-			loadArticle(articleSource, -1, false)
+			loadArticle(-1, false)
 		})
 	})
+
+
 
 //incase a hard refresh overrides baraba navigation 
 if(document.location.pathname =="/app"){
 	appContentLoad()
 	appIntro()
 }
-else{
-	//for the index page
-	indexIntro()
+else {
+	if(document.location.pathname =="/")indexIntro()
 }
 
 function appContentLoad(){
-	loadArticle(articleSource, -1, false)
+	loadArticle( -1, false)
 	
 	//next button increase article index by 1
 	document.getElementById("next").addEventListener("click", () =>{
 		articleDateAdd(-1)
-		loadArticle(articleSource, -1, true)
+		loadArticle(-1, true)
 	})
+	document.querySelector('.nav-links').style.visibility = "inherit"
 	//back button subtracts the article index by 1
 	document.getElementById("back").addEventListener("click", () => {	
 		if(new Date(articleDate).getTime() >= new Date(dateAdd(new Date(), -3)).getTime() || articleDate <= 0){
 			document.querySelector(".logo a ").click()
     	}else{
 			articleDateAdd(1)
-			loadArticle(articleSource, 1, true)
+			loadArticle( 1, true)
     }
 	})
 
@@ -147,7 +148,7 @@ barba.init({
 			appOutro()
 			setTimeout(function() {
                 done();
-            }, 300);
+            }, 200);
 		}	
 	}
 

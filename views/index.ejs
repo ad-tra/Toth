@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
 	<link rel="stylesheet" type="text/css" href='/stylesheets/style.css'>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=6"/>
@@ -9,41 +10,48 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 	<link rel="manifest" href="images/site.webmanifest">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-G5SNFGB36J"></script>
+	<script>
+  	window.dataLayer = window.dataLayer || [];
+  	function gtag(){dataLayer.push(arguments);}
+  	gtag('js', new Date());
+	gtag('config', 'G-G5SNFGB36J');
+	</script>
+	
 	<title>Toth - Read SAT passages</title>
 </head>
 
 
 <body data-barba="wrapper" class = "light" id="blue">
 
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="javascripts/pre-load.js"></script>
 
 <nav>
 	<div class="logo"><a href= "/"> TOTH</a></div>
-	<ul class = "nav-links">
+	<ul class = "nav-links" style = "visibility: hidden;">
 		
-		<li class = "nav-dropdown" ><a href="#" >Sources</a>
+		<li class = "nav-dropdown" ><a style = "cursor: default;" href="#" >Topics</a>
 			<ul class="dropdown" id = "sources">
 				
 				<li class="dropdown-option">
-					<div id = "articlesOfNote" class = "link"> Articles of Note</div>
+					<div id = "articlesOfNote" class = "link">Literature</div>
+					<div id = "science" class = "link">Science</div>
 				</li>
 				
 				<div class="separateur"></div>
 
 				<li class="dropdown-option">
-					<div id ="essaysOpinions" class = "link"> Essays & Opinions</div>
+					<div id ="essaysOpinions" class = "link">Social Science</div>
+					<div id = "history" class = "link">History</div>
 				</li>
 				
-				<div class="separateur"></div>
 
-				<li class="dropdown-option">
-					<div id = "science" class = "link"> Science</div>
-				</li>
 
 			</ul>
 		</li>
 		
-		<li class = "nav-dropdown"><a href="#" >Theme</a>
+		<li class = "nav-dropdown"><a href="#" style  = "cursor: default;">Customize</a>
 			<ul class="dropdown">
 				<li class="dropdown-option">
 					
@@ -60,31 +68,19 @@
 					<div style= "color:var(--black);cursor: default;"> Night Mode</div>
 					
 					<label id = "darkSwitch" class="switch">
-  						<input type="checkbox">
-  						<span class="slider"></span>
+						  <input type="checkbox">
+						  <span class="slider"></span>
 					</label>
 				
 				</li>
-				<!--<li class="separateur"></li>
-				<li class="dropdown-option">
-					
-					<svg xmlns="http://www.w3.org/2000/svg" fill ="var(--black)"width="22px" viewBox="0 0 64 64" width="512"><path d="m11 56h7c1.1 0 2-0.9 2-2s-0.9-2-2-2h-6v-4h5c1.7 0 3-1.3 3-3v-6c0-1.7-1.3-3-3-3h-7c-1.1 0-2 0.9-2 2s0.9 2 2 2h6v4h-5c-1.7 0-3 1.3-3 3v6c0 1.7 1.3 3 3 3z"/><path d="m10 28h4 4c1.1 0 2-0.9 2-2s-0.9-2-2-2h-2v-14c0-1.1-0.9-2-2-2h-3c-1.1 0-2 0.9-2 2s0.9 2 2 2h1v12h-2c-1.1 0-2 0.9-2 2s0.9 2 2 2z"/><path d="m29.5 22h21c3 0 5.5-2.5 5.5-5.5s-2.5-5.5-5.5-5.5h-21c-3 0-5.5 2.5-5.5 5.5s2.5 5.5 5.5 5.5zm0-7h21c0.8 0 1.5 1.5 1.5s-0.7 1.5-1.5 1.5h-21c-0.8 0-1.5-0.7-1.5-1.5s0.7-1.5 1.5-1.5z"/><path d="m50.5 39h-21c-3 0-5.5 2.5-5.5 5.5s2.5 5.5 5.5 5.5h21c3 0 5.5-2.5 5.5-5.5s-2.5-5.5-5.5-5.5zm0 7h-21c-0.8 0-1.5-0.7-1.5-1.5s0.7-1.5 1.5-1.5h21c0.8 0 1.5 1.5 1.5s-0.7 1.5-1.5 1.5z"/></svg>
-				
-					<div style= "color:var(--black);cursor: default;">Line Numbers</div>
-					
-					<label id = "lineSwitch" class="switch">
-  						<input type="checkbox">
-  						<span class="slider"></span>
-					</label>
-					
-				</li>-->
+
 
 			</ul>
 		</li>
 
 		
 		
-		<li><a href="#">About</a></li>
+		<li><a href="#" onclick="alert('__Comming Soon__\n If you have any inquiries contact toth.toools@gmail.com')">About</a></li>
 	</ul>
 
 	<svg version="1.1" class="background-pattern" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -107,18 +103,18 @@
 	</svg>
 </nav>	
 
-<main data-barba="container" data-barba-namespace="index">
+<main id = "index" data-barba="container" data-barba-namespace="index">
 	
 	<div class = "left-panel">
-	
-		<h1> TOTH</h1>
-		<h2> Get comfortable with SAT Reading Passages <span>by familiarizing yourself with the test's formatting.</span></h2>
-		<h3>Articles are sourced from aldaily.com, as recommended by Erica L. Meltzer</h3>
+		
+		<!-- Refine your     Reading skills -->
+		<h1> Prepare for <br>the SAT Reading</br></h1>
+		<div class="dash"></div>
 	</div>
 
 	<div class= "right-panel">
 	 	
-	 	
+		<h2>Become a stronger reader <span> by exposing yourself to challenging passages. </span></h2>
 	 	<a class = "button" href="./app">Start Reading</a>
 		<div class="button-pattern"></div>	
 	</div>	
@@ -127,6 +123,7 @@
 <footer>
 	<script src="https://unpkg.com/@barba/core"></script>
 	<script src ="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
+
 	<script  src= "javascripts/main.js"></script>	
 </footer>
 </body>	

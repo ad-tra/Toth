@@ -18,7 +18,7 @@ body{
   background: var(--blue);
 }
 .light{
-	--black: #231F20 ;
+	--black: #231f20 ;
 	--blue: #0E4A82;
 	--gray:#E6E7E9;
 	--dark-gray:#CECFD1;
@@ -30,6 +30,10 @@ body{
 --gray:#1A1D29;
 --white: #252A3B;
 --dark-gray: #2D334A;
+/*--black: #E6E7E9 ;
+--gray:hsl(216, 53%, 9%);
+--white: hsl(217, 28%, 15%);
+--dark-gray: hsl(219, 30%, 18%);*/
 }
 
 #blue{
@@ -58,32 +62,34 @@ body{
 @font-face{
 	font-family: 'freesans';
 	src: url(../fonts/freesans.ttf);
-
+	unicode-range: U+000-5FF;
 }
 
 @font-face{
 	font-family: 'freesans-bold';
 	src: url(../fonts/freesansbold.ttf);
-
+	unicode-range: U+000-5FF;
 }
 
 @font-face{
 	font-family: 'rokkitt-bold';
 	src: url(../fonts/rokkitt-bold.ttf);
-
+	unicode-range: U+000-5FF;
 }
 @font-face{
 	font-family: 'rokkitt';
 	src: url(../fonts/rokkitt-regular.ttf);
-
+	unicode-range: U+000-5FF;
 }
 @font-face{
 	font-family: 'doris-pp';
 	src: url(../fonts/dorisbr.ttf);
+	unicode-range: U+000-5FF;
 }
 @font-face{
 	font-family: 'calalig';
 	src: url(../fonts/CalaLig.otf);
+	unicode-range: U+000-5FF;
 }
 
 
@@ -149,17 +155,17 @@ nav{
 	justify-content: space-between;
 	align-items: flex-end;
 	min-height: 3em;
-	padding: 1em 5% 0.31em 8%;	
+	padding: 1em 5% 0.31em 6%;	
 	height: 4%;
 	width: 100%;
 	background-color:var(--gray);
-	font-family: 'rokkitt';
+	font-family: 'rokkitt', Helvetica, sans-serif;
 
 
 }
 
 .logo a{
-	font-family: 'rokkitt-bold';
+	font-family: 'rokkitt-bold',Helvetica, sans-serif;
 	font-size: 1.7em;
 	color: var(--black);
 	border-bottom: 0.18em solid var(--blue);
@@ -180,9 +186,7 @@ nav{
 	opacity: 1;
 	visibility: visible;
 }
-#sources{
-	height: 14em;
-}
+
 .dropdown{
     visibility: hidden;
     list-style: none;
@@ -213,7 +217,7 @@ nav{
     height: 0.1em;
 }
 .dropdown-option div{
-	font-family: 'freesans';
+	font-family: 'freesans',Helvetica, sans-serif;;
 	cursor: pointer;
 	margin-left: 0.5em;
     font-size: 1.3em;
@@ -255,134 +259,155 @@ svg{
 main{
 	display: flex;
 	justify-content: center;
-	margin-top: 8%;
-    margin-bottom: 8%;
+	margin: 15vh auto;
 	}
+
+
+#index{
+	flex-direction: column;
+	padding-left: 12%;
+	max-width: 124em;
+}
 
 .left-panel{
 	display: flex;
 	flex-flow: column;
-	width: 35em;
-	margin-left: 12%;
-	font-family: 'freesans';
+	font-family: 'freesans',Helvetica, sans-serif;;
 	visibility: hidden;
 }
 
 .left-panel h1{
-	font-family: 'rokkitt-bold';
-	font-size: 11.5em;
+	font-family: 'rokkitt-bold',Helvetica, sans-serif;;
+    font-size: 12.5em;
 	color: var(--black);
-	width: 1.1em;
-	height:1.23em;
+	line-height: 1em;
+	/*width: 1.1em;
 	border-bottom: 0.12em solid var(--blue);
-	border-top: 0.12em solid var(--blue);
+    border-top: 0.12em solid var(--blue);
+	*/
+}
+.dash{
+	background-color: var(--blue);
+	height: 1.3em;
+	width: 17em;
 
 }
-
-.left-panel h2{
-	font-family: 'freesans-bold';
-	color: var(--black);
-	margin-top: 1.5em;
-	font-size: 2em;
-	font-weight: 400; 
-}
-
-.left-panel span{
-	color: var(--black);
-	font-family: 'freesans';
-	font-weight: 400;
-}
-
-.left-panel h3{
-	color: var(--black);
-	margin-top:4em;
-	font-weight: 400;
-	opacity: 0.8;
-	font-size: 1.6em;
-}
-
 .right-panel{
 	display: flex;
 	align-items:flex-end;
-	flex-grow:1;
-	justify-content: flex-end;
-	max-width: 100em;
+	justify-content: flex-start;
+	position: relative;
+	bottom:8em;
 
+}
+.right-panel h2{
+	font-family: 'freesans-bold',Helvetica, sans-serif;;
+	color: var(--black);
+	font-size: 2.5em;
+	font-weight: 400; 
+	margin-top: 4em;
+	opacity:0.9;
+	visibility: hidden;
+}
 
+.right-panel span{
+	color: var(--black);
+	font-family: 'freesans',Helvetica, sans-serif;
+	font-weight: 400;
 }
 
 .button {
 	white-space: nowrap;
-	font-family: 'freesans-bold';
+	font-family: 'freesans-bold', Arial, Helvetica, sans-serif;
 	font-size: 1.8em;
 	padding: 0.76em 2.43em 0.76em 2.43em;
 	background-color: var(--blue);
 	color: var(--gray);
 	font-weight: 700;
-	position: relative;
-	left:2em;
-	bottom: 3em;
 	visibility: hidden;
-	
+	position: relative;
+	left:4em;
 }
 .button:hover{
 	background-color:var(--dark-blue);
 }
 
 .button-pattern{
-	width: 426px;
-	height: 336px;
-	z-index: -1;
+	width: 68%;
+	height: 20em;
+    z-index: -1;
+    max-height: 30em;
 	background: repeating-linear-gradient(
 		45deg, 
       	transparent 0 20px, 
       	var(--blue) 20px 25px);
 	opacity: 0.6;
 	visibility: hidden;
+	position: relative;
+	top:5vh;
+}
+@media screen and (max-width: 1600px) and (min-width: 1000px){
+	#index{
+		font-size: 0.78em;
+	}
 }
 
-@media screen and (max-width: 1150px) {
-	
-	main{
-		flex-flow: column;
-		margin-top: 20%;
+@media screen and (max-width: 1000px) {
+	.button{
+		align-self: flex-start;
+		position: static;
+		margin-top: 6em;
 	}
-	
-	nav{
-	    font-size: 0.7em;	
+	.right-panel h2{
+		margin-top: 0;
 	}
 	.left-panel{
-	    width: 76%;
-		font-size: 0.6em;
-	}
-	.button{
-		font-size: 1.47em;
-		bottom: 7em;
+		margin-top:-10%;
 	}
 	.button-pattern{
-		height: 300px;
-
+		top:-10em;
+		left:13em;
+	}
+	.right-panel{
+		flex-direction: column;
+		bottom:-5em;
+		align-items: flex-start;
+		font-size: 1.7em;
 	}
 	.nav-links{
 		width: auto;
 	}
+	nav{
+	    font-size: 0.7em;	
+	}
+	#index{
+		font-size: 0.35em;
+	}
+
 	#app{
-		flex-flow: row;
+		font-size: 1em;
 
 	}
 	article{
 		flex-flow: column;
 	}
-	article section{
+	.article-section{
 		align-self: center;
-		width: 90%  !important; 
+		width: 94%  !important; 
 	}
 	.container{
 		width: 100% !important;
 	}
-	#get-article{
+	.get-article{
 		font-size: 0.75em;
 	}
+	.description-top {
+		font-size: 0.8em;
+	}
+	.pagination{
+		font-size: 0.8em;
+	}
+
 	#banner{
 	font-size: 0.7em;
     margin: 0 10px;
@@ -410,7 +435,7 @@ html.is-animating .transition-fade {
 /** Styling for the second page: app.html **/
 
 .container{
-	font-family: 'doris-pp';
+	font-family: 'doris-pp',Helvetica, sans-serif;
 	width: 65em;
 	color: var(--black);
 }
@@ -431,10 +456,7 @@ html.is-animating .transition-fade {
 	font-size: 6em;
 }
 
-.description{
 
-
-}
 .description-top {
 	line-height: 3em;
 	padding-left: 15%;
@@ -449,14 +471,11 @@ html.is-animating .transition-fade {
     word-spacing: 0.1em;
 }
 
-.description-top h3{
+.description-top h3 {
     font-size: 1.2em;
-    margin-top: 0.5em;
+    margin: 0.5em 0em;
     word-spacing: -0.1em;
-    line-height: 1.5em;
-
 }
-
 .description-bottom{
 	border-top: 0.1em solid var(--black);
 	border-bottom: 0.1em solid var(--black);
@@ -474,18 +493,15 @@ html.is-animating .transition-fade {
     padding: 0.1em 0.45em 0.1em 0.45em;
     margin-top: 1.5em;
 }
-.description-bottom h4{
-	margin-top: 1em;
-	line-height: 1.2em;
-	font-family: 'freesans';
-	font-weight: 100;
-	font-size: 1.25em;
-	margin-bottom: 1em;
-	
+.description-bottom h4 {
+    margin-top: 1em;
+    line-height: 1.2em;
+    font-family: 'freesans';
+    font-size: 1.2em;
+    margin-bottom: 1em;
 }
-
 article{
-	font-family: 'calalig';
+	font-family: 'calalig', 'Times New Roman', Times, serif;
 	display: flex;
 	justify-content: space-between;
 	text-align: left;
@@ -502,14 +518,15 @@ article{
 	color: var(--black);
 	text-decoration: underline;
 }
-article section{
+.article-section{
 	width: 43%;
 	display: flex;
 }
 .line-num p {
 	font-style: italic;
 	padding-top: 108px;
-	color: #aaa;
+	color: var(--black);
+	opacity: 0.3;
 	padding-right: 5px;
 }
 .separateur{
@@ -556,28 +573,28 @@ color: var(--black);
 pointer-events: none
 }
 
-#get-article{
+.get-article{
 	display: flex;
     align-items: center;
     flex-flow: column;
-	margin-bottom: 5em;
 }
-#get-article a{
+.get-article a{
 	font-family: 'doris-pp';
 	font-size: 6em;
 	border: none;
 	cursor: pointer;
 	background-size: 2.5px 15px;
 }
-#get-article a:hover{
+.get-article a:hover{
     background-size: 2.5px 140px;
 }
-#get-article h3{
+.get-article h3{
 	margin-top: 1em;
 	text-align: center;
 }
 
 .pagination{
+	margin: 5em 0;
 	display: none;
 	flex-flow: row;
 	justify-content: space-evenly;
@@ -585,6 +602,7 @@ pointer-events: none
 }
 .pagination h3{
 	margin-top: 0.5em !important;
+	opacity: 0.7;
 }
 .loader-container{
 	display: none;

@@ -3,19 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
     "@mozilla/readability": "^0.3.0",
-    "cookie-parser": "~1.4.4",
+    "axios": "^0.20.0",
+    "cheerio": "^1.0.0-rc.3",
+    "compression": "^1.7.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
-    "flat-cache": "^2.0.1",
     "http-errors": "~1.6.3",
     "jsdom": "^16.4.0",
-    "mongoose": "^5.10.7",
-    "morgan": "~1.9.1",
-    "puppeteer": "^5.2.1"
+    "mongoose": "^5.10.7"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "@types/jest": "^26.0.15"
   }
 }
