@@ -271,7 +271,6 @@ main{
 	display: flex;
 	flex-flow: column;
 	font-family: 'freesans',Helvetica, sans-serif;;
-	visibility: hidden;
 	padding-left: 12%;
 }
 
@@ -310,7 +309,6 @@ main{
 .right-panel h2{
 	margin-top: 4em;
 	opacity:0.9;
-	visibility: hidden;
 }
 .medium-text span{
 	color: var(--black);
@@ -327,7 +325,6 @@ main{
 	background-color: var(--blue);
 	color: var(--gray);
 	font-weight: 700;
-	visibility: hidden;
 	position: relative;
 	left:4em;
 }
@@ -345,7 +342,6 @@ main{
       	transparent 0 20px, 
       	var(--blue) 20px 25px);
 	opacity: 0.6;
-	visibility: hidden;
 	position: relative;
 	top:5em;
 }

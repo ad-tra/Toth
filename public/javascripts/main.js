@@ -1,38 +1,3 @@
-var tl = gsap.timeline()
-//intro animation for the index page
-function indexIntro(){ 
-	gsap.defaults({duration:1})
-	tl
-	.from('.left-panel, .right-panel h2', {autoAlpha:0, y:25, ease:"power3", delay:0.3})
-	.from('.button-pattern', {autoAlpha:0, y:-50, ease:"power2",delay:0.1},"-=.9")
-	.from('.button', {autoAlpha:0,x: 50,ease: "power2",delay:0.1},"-=.9")
-}
-//shorter than intro by 0.5
-function indexOutro(){
-	tl
-	.to('.left-panel, .right-panel h2', {autoAlpha:0,duration:0.5, y:25, ease:"power3"})
-	.to('.button',{autoAlpha:0, x:50, duration:0.5,ease:"power2",}, "-=0.45")
-	.to('.button-pattern', {autoAlpha:0,y: -50,duration:0.5,ease: "power2",}, "-=0.45")
-
-}
-//intro animation for the app page
-function appIntro(){
-	tl
-	.from("#banner, .description-top, .description-bottom" ,{duration: 0.6,opacity: 0, x: -20})
-	.from("article", {duration: 0.5,opacity:0, x: 5}, "-=0.4")
-
-}
-
-function appOutro(){
-	tl
-	.to("#banner" ,{duration: 0.3, opacity: 0,y:'-25%'})
-	.to(".description-top, .description-bottom", {duration: 0.3,opacity:0, x:-25, stagger:0.2,}, "=-0.5")
-	.to("article", {duration: 0.3,opacity:0, y: 25}, "=-0.5")
-}
-
-
-
-
 
 //if dark mode is already selected, update ui status && listen to user clicks 
 var drkModeCheck = document.querySelector("#darkSwitch input")
@@ -92,7 +57,6 @@ document.querySelectorAll("#sources li div").forEach((el) =>{
 //incase a hard refresh overrides baraba navigation 
 if(document.location.pathname =="/app"){
 	appContentLoad()
-	appIntro()
 }
 else {
 	if(document.location.pathname =="/")indexIntro()
@@ -122,35 +86,12 @@ function appContentLoad(){
 		catch(e){}}).observe(document.querySelector(".article-main"))
 }
 
-console.log('%cHello there: made by Adam Trabelsi', 'font-size: 17px;');
+console.log('%cHello there: made by Adam ', 'font-size: 10px;');
 barba.init({
 	transitions: [{
-		from:{namespace: ['index']},
+		from:{namespace: ['index']},to:{namespace: ['app']},
 		enter(){
-			appIntro()
 			appContentLoad()
-		},
-		leave(){
-			const done = this.async();
-			indexOutro()
-			 setTimeout(function() {
-                done();
-            }, 200);
-		}		
-	},
-	{
-		from:{namespace: ['app']},
-		enter(){
-			indexIntro()
-		},
-		leave(){
-			const done = this.async()
-			appOutro()
-			setTimeout(function() {
-                done();
-            }, 200);
-		}	
-	}
-
-	]
+		}
+	}]
 })

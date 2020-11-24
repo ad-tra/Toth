@@ -11,8 +11,9 @@ function purifyContent(html, articleType){
 		let reader = new Readability(document).parse();	
 		
 		document.documentElement.innerHTML = reader.content
-		if (reader.length< 2000)
-			reject("X.not long enough");	
+		console.log(reader.length)
+		if (reader.length< 2000 || reader.length > 70000)
+			reject("X.not long enough or very long");	
 		//post pure adjustemnts over result
 		try{ 
 			document.querySelectorAll('img, figure').forEach((el)=>{el.remove()})
@@ -32,7 +33,7 @@ function purifyContent(html, articleType){
 			}
 		}catch(e){}
 
-		resolve(document.documentElement.innerHTML.replace(/(\t|\n)/g,'')) 
+		resolve(document.documentElement.innerHTML.replace(/[^ -~]/g,'')) 
 	}).catch((e)=>{return null})
 }
 
@@ -52,7 +53,7 @@ function historyProcessDate(date){
 async function fetchHTML(url){
 	try{
 		const data = await axios.get(url).then(res => res.data);
-		return cheerio.load(data);
+		return cheerio.load(data, { decodeEntities: false });
 	}catch(err){}
 }
 
@@ -79,7 +80,7 @@ async function scrape(articleType,date){
 			var tlink = "http://www.emersonkent.com/" + allLinks.eq(0).attr('href')
 			
 			let temp = $(`#table5 > tbody > tr:nth-child(1) > td:nth-of-type(3)`).text()
-			var tdiscrp = allLinks.eq(0).text().replace(/(\t|\n)/g,'') + ": a speech given by " + allLinks.eq(allLinks.length-1).text().replace(/(\t|\n)/g,'') +" and d"+ temp.substring(temp.indexOf('elivered')).replace(/(\t|\n)/g,'') +" on the date of: "+ $('#table5>tbody > tr:nth-child(1) > td:nth-of-type(1) > p').text().replace(/(\t|\n)/g,'')
+			var tdiscrp = allLinks.eq(0).text().replace(/(\t|\n)/g,'') + ": a speech given by " + allLinks.eq(allLinks.length-1).text().replace(/(\t|\n)/g,'') 
 			break;
 		}
 		case 0:
@@ -104,7 +105,6 @@ async function scrape(articleType,date){
 	"link": tlink,
 	"discrp": tdiscrp}
 }
-
 
 module.exports = {
 	scrape,

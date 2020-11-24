@@ -6,6 +6,7 @@ const Article = require("../models/articles");
 
 function midlewareDB(i){
 return async (req,res,next)=>{
+
   await Article.findOne({type: i,  date: req.query.date}, async(err, docs)=>{
     if(!docs){
       try{
@@ -17,6 +18,7 @@ return async (req,res,next)=>{
           res.status(500)
       }
     }if(docs.content == null) res.status(500)
+    
     
   res.send(docs)
   })  

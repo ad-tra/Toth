@@ -112,7 +112,7 @@ function loadArticle(n, scrollBoolean, errCount){
 				document.querySelector('article').querySelectorAll('a').forEach((el)=>{el.setAttribute('target', '_blank')})       			
 			
 			}else{
-    			articleDateAdd(-1)
+    			articleDateAdd(n)
     			loadArticle(n,scrollBoolean, counter++)
     		}
     	}
