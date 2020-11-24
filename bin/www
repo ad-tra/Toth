@@ -27,11 +27,11 @@ var server = http.createServer(app);
  */
 
 server.listen(port, ()=> {mongoose.connect(process.env.DB_URI ,{useNewUrlParser: true,useUnifiedTopology: true})})
-const db = mongoose.connection;
-db.on("error", (err)=>{console.log(err)})
-db.once("open", ()=>{
-  console.log("Database Connected")
-})
+ const db = mongoose.connection;
+ db.on("error", (err)=>{console.log(err)})
+ db.once("open", ()=>{
+   console.log("Database Connected")
+ })
 //server.on('error', onError);
 //server.on('listening', onListening);
 

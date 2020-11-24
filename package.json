@@ -5,8 +5,8 @@
   "scripts": {
     "start": "pm2 start ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test": "jest",
-    "stop" : "pm2 stop www"
+    "restart": "pm2 restart all",
+    "stop" : "pm2 kill all"
   },
   "dependencies": {
     "@mozilla/readability": "^0.3.0",

@@ -8,7 +8,7 @@
 
 }
 body{
-	overflow-x: hidden;
+	/*overflow-x: hidden;*/
 	background: var(--white);
 		-moz-osx-font-smoothing: grayscale;
 }
@@ -56,7 +56,6 @@ body{
 .dark .container{
 	opacity: 0.65;
 	background: var(--gray);
-	padding-left: 0.5em;
 }
 
 @font-face{
@@ -217,7 +216,7 @@ nav{
     height: 0.1em;
 }
 .dropdown-option div{
-	font-family: 'freesans',Helvetica, sans-serif;;
+	font-family: 'freesans',Helvetica, sans-serif;
 	cursor: pointer;
 	margin-left: 0.5em;
     font-size: 1.3em;
@@ -259,14 +258,13 @@ svg{
 main{
 	display: flex;
 	justify-content: center;
-	margin: 15vh auto;
+	margin: 10% auto;
 	}
 
 
 #index{
 	flex-direction: column;
-	padding-left: 12%;
-	max-width: 124em;
+	max-width: 3840px;
 }
 
 .left-panel{
@@ -274,10 +272,11 @@ main{
 	flex-flow: column;
 	font-family: 'freesans',Helvetica, sans-serif;;
 	visibility: hidden;
+	padding-left: 12%;
 }
 
 .left-panel h1{
-	font-family: 'rokkitt-bold',Helvetica, sans-serif;;
+	font-family: 'rokkitt-bold',Helvetica, sans-serif;
     font-size: 12.5em;
 	color: var(--black);
 	line-height: 1em;
@@ -298,19 +297,22 @@ main{
 	justify-content: flex-start;
 	position: relative;
 	bottom:8em;
+	padding-left: 12%;
 
 }
-.right-panel h2{
+.medium-text{
 	font-family: 'freesans-bold',Helvetica, sans-serif;;
 	color: var(--black);
 	font-size: 2.5em;
 	font-weight: 400; 
+
+}
+.right-panel h2{
 	margin-top: 4em;
 	opacity:0.9;
 	visibility: hidden;
 }
-
-.right-panel span{
+.medium-text span{
 	color: var(--black);
 	font-family: 'freesans',Helvetica, sans-serif;
 	font-weight: 400;
@@ -319,6 +321,7 @@ main{
 .button {
 	white-space: nowrap;
 	font-family: 'freesans-bold', Arial, Helvetica, sans-serif;
+	width: fit-content;
 	font-size: 1.8em;
 	padding: 0.76em 2.43em 0.76em 2.43em;
 	background-color: var(--blue);
@@ -333,7 +336,7 @@ main{
 }
 
 .button-pattern{
-	width: 68%;
+	width: 61%;
 	height: 20em;
     z-index: -1;
     max-height: 30em;
@@ -344,15 +347,105 @@ main{
 	opacity: 0.6;
 	visibility: hidden;
 	position: relative;
-	top:5vh;
+	top:5em;
 }
-@media screen and (max-width: 1600px) and (min-width: 1000px){
-	#index{
-		font-size: 0.78em;
-	}
+.pros-container{
+	margin-top: 20vh;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	row-gap: 15em;
+	column-gap: 2em;
+	padding: 15em 0;
+	color:var(--gray);
+	background-color: var(--blue);
 }
 
-@media screen and (max-width: 1000px) {
+.pro p{
+	font-family: 'freesans',Helvetica, sans-serif;
+	font-size: 1.5em;
+	opacity: 0.9;
+}
+.pro h3{
+	font-family: 'rokkitt-bold',Helvetica, sans-serif;
+	font-size: 4em;
+	line-height: 1.01em;
+	margin-bottom: 0.5em;
+}
+
+.pro-2-thick-dash, .pro-1-thick-dash{
+	height: 100%;
+	width: 40%;
+	background: repeating-linear-gradient( 45deg,  transparent 0 20px,var(--gray)  20px 25px);
+	opacity: 0.5;
+
+}
+.pro-1-thick-dash{
+	height: 30%;
+	justify-self: right;
+}
+.pro1 {margin-left: 24%}
+.pro2 {margin-right: 12%}
+.testo-container{background-color: var(--gray);padding-bottom: 7.5em;}
+.testo-container h2{
+	font-family:'rokkitt-bold';
+	text-align: center;
+	margin: 1.5em auto 0 auto;
+	font-size: 5em;
+	color: var(--black);
+	max-width: 90%;
+}
+.testo{
+	margin:0 20%;
+	font-family: 'freesans';
+	padding-top:7em;
+	display: flex;
+	align-items: flex-end;
+}
+.testo p{width: 90%;}
+.testo .dash{
+	width: 7%;
+	margin-right:3%;
+}
+.testo-credit{
+	text-align: right;
+	margin-right: 20%;
+	font-size: 1.7em;
+	opacity: 0.5;
+}
+.testo p{
+	font-size: 2em;
+}
+.recall-button{
+	position: static;
+	margin: auto;
+	margin-top: 5em;
+}
+.button-recall-disc{
+	font-family: 'freesans';
+	 font-size: 1.2em;
+	 margin: 0.5em auto;
+	  color:var(--blue);
+}
+
+ @media screen and (max-width: 1599px) and (min-width: 631px){
+	.left-panel, .right-panel{
+		font-size: 0.58em;
+	}
+	nav{
+	    font-size: 0.6em;	
+	}
+
+} 
+
+ @media screen and (max-width: 631px) {
+	.pros-container{
+		
+		grid-template-columns: 1fr;
+		row-gap: 5em;		
+	}
+	.pro ,.testo{
+		margin:0 6% 0 12%;
+	}
 	.button{
 		align-self: flex-start;
 		position: static;
@@ -361,12 +454,9 @@ main{
 	.right-panel h2{
 		margin-top: 0;
 	}
-	.left-panel{
-		margin-top:-10%;
-	}
 	.button-pattern{
 		top:-10em;
-		left:13em;
+		left:39%;
 	}
 	.right-panel{
 		flex-direction: column;
@@ -383,7 +473,9 @@ main{
 	#index{
 		font-size: 0.35em;
 	}
-
+	.pros-container, .testo-container{
+		font-size: 2em;
+	}
 	#app{
 		font-size: 1em;
 
@@ -401,13 +493,10 @@ main{
 	.get-article{
 		font-size: 0.75em;
 	}
-	.description-top {
+	.description-top, .pagination{
 		font-size: 0.8em;
 	}
-	.pagination{
-		font-size: 0.8em;
-	}
-
+	.recall-button, .button-recall-disc{font-size: 2.7em;}
 	#banner{
 	font-size: 0.7em;
     margin: 0 10px;
@@ -420,7 +509,7 @@ main{
 		flex-flow: column-reverse;
 
 	}
-}
+} 
 
 .transition-fade {
   transition: 0.05s;
@@ -436,8 +525,9 @@ html.is-animating .transition-fade {
 
 .container{
 	font-family: 'doris-pp',Helvetica, sans-serif;
-	width: 65em;
+	width: 67em;
 	color: var(--black);
+	padding: 0 1em;
 }
 
 #banner{
@@ -453,7 +543,7 @@ html.is-animating .transition-fade {
 
 #banner h1{
 	color: var(--black);
-	font-size: 6em;
+	font-size: 5em;
 }
 
 
@@ -512,7 +602,7 @@ article{
     font-size: 1.2em;
     text-indent: 1em;
     /*width: 43;*/
-    line-height: 27px;
+    line-height: 1.4em;
 }
 .article-main a{
 	color: var(--black);
@@ -584,6 +674,7 @@ pointer-events: none
 	border: none;
 	cursor: pointer;
 	background-size: 2.5px 15px;
+	background-color:transparent;
 }
 .get-article a:hover{
     background-size: 2.5px 140px;
@@ -594,7 +685,7 @@ pointer-events: none
 }
 
 .pagination{
-	margin: 5em 0;
+	margin:5em 0 2.5em 0;
 	display: none;
 	flex-flow: row;
 	justify-content: space-evenly;
@@ -672,3 +763,9 @@ pointer-events: none
 }
 
 
+.about-container{
+padding-left:12% ;
+}
+.about-container > * {
+	margin: revert;
+}

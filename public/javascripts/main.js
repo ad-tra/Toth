@@ -106,7 +106,6 @@ function appContentLoad(){
 		articleDateAdd(-1)
 		loadArticle(-1, true)
 	})
-	document.querySelector('.nav-links').style.visibility = "inherit"
 	//back button subtracts the article index by 1
 	document.getElementById("back").addEventListener("click", () => {	
 		if(new Date(articleDate).getTime() >= new Date(dateAdd(new Date(), -3)).getTime() || articleDate <= 0){
@@ -120,9 +119,10 @@ function appContentLoad(){
 	//repopulates lines every time user changes window size 
 	new ResizeObserver(()=>{
 		try{populateLine()}
-		catch(e){console.log("ResizeObserver malfunction: " + e)}}).observe(document.querySelector(".article-main"))
+		catch(e){}}).observe(document.querySelector(".article-main"))
 }
 
+console.log('%cHello there: made by Adam Trabelsi', 'font-size: 17px;');
 barba.init({
 	transitions: [{
 		from:{namespace: ['index']},
