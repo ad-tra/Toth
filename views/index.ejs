@@ -26,10 +26,10 @@
 
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="javascripts/pre-load.js"></script>
-
+<noscript> </noscript>
 <nav>
 	<div class="logo"><a href= "/"> TOTH</a></div>
-	<ul class = "nav-links" style = "visibility: hidden;">
+	<ul class = "nav-links">
 		
 		<li class = "nav-dropdown" ><a style = "cursor: default;" href="#" >Topics</a>
 			<ul class="dropdown" id = "sources">
@@ -56,7 +56,7 @@
 				<li class="dropdown-option">
 					
 					<svg xmlns="http://www.w3.org/2000/svg" width = "22px" viewBox="0 0 512 512"><circle cx="256" cy="378.5" r="25"/><path d="M256 0C114.5 0 0 114.5 0 256c0 141.5 114.5 256 256 256 141.5 0 256-114.5 256-256C512 114.5 397.5 0 256 0zM256 472c-119.4 0-216-96.6-216-216 0-119.4 96.6-216 216-216 119.4 0 216 96.6 216 216C472 375.4 375.4 472 256 472z"/><path d="M256 128.5c-44.1 0-80 35.9-80 80 0 11 9 20 20 20s20-9 20-20c0-22.1 17.9-40 40-40 22.1 0 40 17.9 40 40 0 22.1-17.9 40-40 40 -11 0-20 9-20 20v50c0 11 9 20 20 20 11 0 20-9 20-20v-32.5c34.5-8.9 60-40.3 60-77.5C336 164.4 300.1 128.5 256 128.5z"/></svg>
-					<div id = "feeling-lucky" class = "link"> Feeling Lucky?</div>
+					<div id = "feeling-lucky" class = "link">Change Color</div>
 				
 				</li>
 				
@@ -80,7 +80,7 @@
 
 		
 		
-		<li><a href="#" onclick="alert('__Comming Soon__\n If you have any inquiries contact toth.toools@gmail.com')">About</a></li>
+		<li><a href="#" onclick="alert('__Coming Soon__\n If you have any inquiries contact toth.toools@gmail.com')">About</a></li>
 	</ul>
 
 	<svg version="1.1" class="background-pattern" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -109,18 +109,76 @@
 		
 		<!-- Refine your     Reading skills -->
 		<h1> Prepare for <br>the SAT Reading</br></h1>
+		<noscript><h1 style= "visibility: visible;"> Prepare for <br>the SAT Reading</br></h1></noscript>
 		<div class="dash"></div>
 	</div>
 
 	<div class= "right-panel">
 	 	
-		<h2>Become a stronger reader <span> by exposing yourself to challenging passages. </span></h2>
-	 	<a class = "button" href="./app">Start Reading</a>
+		<h2 class = "medium-text">Become a stronger reader <span> by exposing yourself to challenging SAT passages. </span></h2>
+		<noscript><h2 class = "medium-text" style = "visibility: visible;">Become a stronger reader <span> by exposing yourself to challenging SAT passages. </span></h2></noscript>
+		
+		<a class = "button" href="./app">Start Reading</a>
+		<noscript><a class = "button" style= "visibility: visible;" href="./app">Start Reading</a></noscript>
+		
 		<div class="button-pattern"></div>	
 	</div>	
+
+	<div class="pros-container">
+		<div class="pro pro1">
+			<h3>Read the Simple English behind the hard passages</h3>
+			<p>The only way to convert the SAT's verbose sentences and unfamiliar vocabulary to easy English are through reading. Here at TOTH you can tailor your reading for the SAT where you find matching articles in History, Science, Social Science, and Literature. </p>
+		</div>
+		<div class="pro-1-thick-dash"></div>
+
+		
+		<div class="pro-2-thick-dash"></div>
+		<div class="pro pro2">
+			<h3>To answer questions you need to first grasp the passages </h3>
+			<p>TOTH is a reading platform that focuses on understanding the text before diving into the question's logic. If you have a hard time understanding what the author is talking about, TOTH is perfect for you. You'll get to read articles that follow similar structure and vocabulary of the real SAT passages.</p>	
+		</div>
 	
+	</div>
+
+	<div class="testo-container">
+		<h2>Students love it!</h2>
+		
+		<div class="testo">
+			<div class="dash"></div>
+			<p class = "medium-text">wow this is so helpful!<span>I was looking for something 
+				like this since, I'm trying to passively study reading for 
+				2 months before I go in depth, and </span>this is perfect!</p>
+		
+		</div>
+		<p class = "testo-credit  medium-text"><span>u/milly_7</span></p>
+		
+		
+		<div class="testo">
+			<div class="dash"></div>
+			<p class="medium-text"><span>This is literally </span>a lifesaver.<span> I've struggled with reading for so long now.</span></p>
+			
+		</div>
+		<p class = " testo-credit medium-text"><span>u/Visual_Plate</span></p>
+
+		<div class="testo">
+			<div class="dash"></div>
+			<p class="medium-text"><span>I could never understand what the hell history and science authors are trying to say. But, </span>Toth improved my reading sense.<span> Thank you.</span></p>
+			
+		</div>
+		<p class = " testo-credit medium-text"><span>Eden Collins</span></p>
+
+	</div>
+	
+	
+	
+	
+	<a class = "button recall-button" href="./app">Read SAT Passages</a>
+	<p class = "button-recall-disc">Get going, It's free</p>
 </main>	
-<footer>
+
+
+<footer style = "background: repeating-linear-gradient( 45deg, transparent 0 20px, var(--blue) 20px 25px); height: 5em; width: 100%;opacity:0.5">
+
 	<script src="https://unpkg.com/@barba/core"></script>
 	<script src ="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
 
