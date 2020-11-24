@@ -8,7 +8,6 @@
     "test": "jest",
     "stop": "pm2 stop all",
     "restart": "pm2 restart all"
-  
   },
   "dependencies": {
     "@mozilla/readability": "^0.3.0",
