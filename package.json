@@ -5,13 +5,10 @@
   "scripts": {
     "start": "pm2 start ./bin/www",
     "dev": "nodemon ./bin/www",
-<<<<<<< HEAD
     "test": "jest",
-    "stop": "pm2 kill"
-=======
+    "stop": "pm2 kill all"
     "restart": "pm2 restart all",
     "stop" : "pm2 kill all"
->>>>>>> 35f639d2b57310387fbcb0da34e527158a7d3a30
   },
   "dependencies": {
     "@mozilla/readability": "^0.3.0",
