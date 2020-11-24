@@ -6,7 +6,7 @@
     "start": "pm2 start ./bin/www",
     "dev": "nodemon ./bin/www",
     "test": "jest",
-    "stop" : "pm2 stop www"
+    "stop": "pm2 kill"
   },
   "dependencies": {
     "@mozilla/readability": "^0.3.0",
@@ -20,10 +20,11 @@
     "http-errors": "~1.6.3",
     "jsdom": "^16.4.0",
     "mongoose": "^5.10.7",
-    "pm2": "^4.5.0"
+    "pm2": "^4.5.0",
+    "production": "^0.0.2"
   },
   "devDependencies": {
-    "jest": "^26.6.3",
-    "@types/jest": "^26.0.15"
+    "@types/jest": "^26.0.15",
+    "jest": "^26.6.3"
   }
 }
