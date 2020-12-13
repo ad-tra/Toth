@@ -425,10 +425,10 @@ main{
 
  @media screen and (max-width: 1599px) and (min-width: 631px){
 	.left-panel, .right-panel{
-		font-size: 0.58em;
+		font-size: 0.68em;
 	}
 	nav{
-	    font-size: 0.6em;	
+	    font-size: 0.78em;	
 	}
 
 } 
