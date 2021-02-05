@@ -427,9 +427,11 @@ main{
 	.left-panel, .right-panel{
 		font-size: 0.68em;
 	}
-	nav{
+	nav, .pros-container, .testo-container{
 	    font-size: 0.78em;	
 	}
+	.recall-button{font-size:1.3em;}
+
 
 } 
 
