@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import NavBar from '../components/NavBar'
 
 export default function Home() {
   return (
@@ -8,7 +7,6 @@ export default function Home() {
         <title>Read SAT Passages - TOTH</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavBar />
       <div>
       <main id="index" data-barba="container" data-barba-namespace="index">
         <div className="left-panel">
@@ -19,8 +17,8 @@ export default function Home() {
         <div className="right-panel">
           <h2 className="medium-text">Become a stronger reader <span> by exposing yourself to challenging SAT passages. </span></h2>
           <noscript>&lt;h2 class = "medium-text" style = "visibility: visible;"&gt;Become a stronger reader &lt;span&gt; by exposing yourself to challenging SAT passages. &lt;/span&gt;&lt;/h2&gt;</noscript>
-          <a className="button" href="./app">Start Reading</a>
-          <noscript>&lt;a class = "button" style= "visibility: visible;" href="./app"&gt;Start Reading&lt;/a&gt;</noscript>
+          <a className="button" href="./literature">Start Reading</a>
+          <noscript>&lt;a class = "button" style= "visibility: visible;" href="./literature"&gt;Start Reading&lt;/a&gt;</noscript>
           <div className="button-pattern" />	
         </div>	
         <div className="pros-container">
@@ -55,11 +53,10 @@ export default function Home() {
           </div>
           <p className=" testo-credit medium-text"><span>Eden Collins</span></p>
         </div>
-        <a className="button recall-button" href="./app">Read SAT Passages</a>
+        <a className="button recall-button" href="./literature">Read SAT Passages</a>
         <p className="button-recall-disc">Get going, It's free</p>
       </main>	
-      <footer style={{background: 'repeating-linear-gradient( 45deg, transparent 0 20px, var(--blue) 20px 25px)', height: '5em', width: '100%', opacity: '0.5'}}>
-      </footer>
+      <footer></footer>
     </div>
 
 

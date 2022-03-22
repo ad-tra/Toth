@@ -1,19 +1,17 @@
+import Link from 'next/link'
+
 export default function NavBar(){
    return (
     <nav>
-    <div className="logo"><a href="/"> TOTH</a></div>
+    <div className="logo"><Link href="/"><a> TOTH</a></Link></div>
     <ul className="nav-links">
       <li className="nav-dropdown"><a style={{cursor: 'default'}} href="#">Topics</a>
         <ul className="dropdown" id="sources">
-          <li className="dropdown-option">
-            <div id="articlesOfNote" className="link">Literature</div>
-            <div id="science" className="link">Science</div>
-          </li>
-          <div className="separateur" />
-          <li className="dropdown-option">
-            <div id="essaysOpinions" className="link">Social Science</div>
-            <div id="history" className="link">History</div>
-          </li>
+          <li className="dropdown-option"><Link href="/literature"><a  className="link">Literature</a></Link></li>
+          <li className="dropdown-option"><Link href="/science"><a  className="link"> Science</a></Link></li>
+          <li className="dropdown-option"><Link href="/social-science"><a  className="link">Social Science</a></Link></li>
+          <li className="dropdown-option"><Link href="/history"><a  className="link">History</a></Link></li>
+            
         </ul>
       </li>
       <li className="nav-dropdown"><a href="#" style={{cursor: 'default'}}>Customize</a>

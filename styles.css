@@ -11,6 +11,8 @@ body{
 	/*overflow-x: hidden;*/
 	background: var(--white);
 		-moz-osx-font-smoothing: grayscale;
+		--dark-blue: #1E65C2;
+		--blue: #326BA1;
 }
 
 ::selection {
@@ -41,10 +43,7 @@ body{
     }
 }
 
-#blue{
---dark-blue: #1E65C2;
---blue: #326BA1;
-}
+
 #orange{
 	--blue:#A17132;
 	--dark-blue:#C27B1E;
@@ -204,7 +203,7 @@ nav{
    height: 9em;
     align-content: center;
     padding: 1em 1em 1em 1em;
-    flex-flow: column nowrap;
+    flex-flow: column wrap;
     background-color: var(--gray);
     border-top: 0.3em solid var(--blue);
     transition: opacity .25s ease-out;
@@ -214,6 +213,12 @@ nav{
 .dropdown-option{
 	display: flex;
 	align-items: center;
+}
+.dropdown-option .link{
+	margin: 0.2em 0;
+	padding: 0;
+	margin: 0 0.2em;
+	white-space: nowrap;
 }
 .dropdown .separateur{
 	background: repeating-linear-gradient( 90deg,transparent 0 2px, var(--blue) 2px 8px);
@@ -226,6 +231,13 @@ nav{
 	margin-left: 0.5em;
     font-size: 1.3em;
     user-select: none;
+}
+#sources{
+	
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	align-items: end;
+	align-content: space-evenly;
 }
 
 .nav-links a{
@@ -263,7 +275,7 @@ svg{
 main{
 	display: flex;
 	justify-content: center;
-	margin: 10% auto;
+	margin: 8% auto;
 	}
 
 
@@ -281,9 +293,10 @@ main{
 
 .left-panel h1{
 	font-family: 'rokkitt-bold',Helvetica, sans-serif;
-    font-size: 12.5em;
+    font-size: 11em;
 	color: var(--black);
 	line-height: 1em;
+	word-spacing:-10px
 	/*width: 1.1em;
 	border-bottom: 0.12em solid var(--blue);
     border-top: 0.12em solid var(--blue);
@@ -307,7 +320,7 @@ main{
 .medium-text{
 	font-family: 'freesans-bold',Helvetica, sans-serif;;
 	color: var(--black);
-	font-size: 2.5em;
+	font-size: 2em;
 	font-weight: 400; 
 
 }
@@ -427,6 +440,8 @@ main{
 	 margin: 0.5em auto;
 	  color:var(--blue);
 }
+
+
 
  @media screen and (max-width: 1599px) and (min-width: 631px){
 	.left-panel, .right-panel{
@@ -653,7 +668,7 @@ font-family: 'doris-pp';
 }
 
 .link:hover {
-  background-size: 2.5px 30px;
+  background-size: 2.5px 100%;
   color: var(--gray);
 }
 .link:focus {
