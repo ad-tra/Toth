@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect } from "react";
-export default function PassageContent() {
+export default function PassageContent({dataRoute}) {
     
 
     

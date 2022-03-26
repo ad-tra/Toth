@@ -30,7 +30,7 @@ export default function NavBar(){
             
         </ul>
       </li>
-      <li className="nav-dropdown"><a href="#" style={{cursor: 'default'}}>Customize</a>
+      <li className="nav-dropdown"><a href="#" style={{cursor: 'default'}}>Theme</a>
         <ul className="dropdown">
           <li className="dropdown-option">
             <svg xmlns="http://www.w3.org/2000/svg" width="22px" viewBox="0 0 512 512"><circle cx={256} cy="378.5" r={25} /><path d="M256 0C114.5 0 0 114.5 0 256c0 141.5 114.5 256 256 256 141.5 0 256-114.5 256-256C512 114.5 397.5 0 256 0zM256 472c-119.4 0-216-96.6-216-216 0-119.4 96.6-216 216-216 119.4 0 216 96.6 216 216C472 375.4 375.4 472 256 472z" /><path d="M256 128.5c-44.1 0-80 35.9-80 80 0 11 9 20 20 20s20-9 20-20c0-22.1 17.9-40 40-40 22.1 0 40 17.9 40 40 0 22.1-17.9 40-40 40 -11 0-20 9-20 20v50c0 11 9 20 20 20 11 0 20-9 20-20v-32.5c34.5-8.9 60-40.3 60-77.5C336 164.4 300.1 128.5 256 128.5z" /></svg>
