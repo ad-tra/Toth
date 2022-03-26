@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -17,8 +18,7 @@ export default function Home() {
         <div className="right-panel">
           <h2 className="medium-text">Become a stronger reader <span> by exposing yourself to challenging SAT passages. </span></h2>
           <noscript>&lt;h2 class = "medium-text" style = "visibility: visible;"&gt;Become a stronger reader &lt;span&gt; by exposing yourself to challenging SAT passages. &lt;/span&gt;&lt;/h2&gt;</noscript>
-          <a className="button" href="./literature">Start Reading</a>
-          <noscript>&lt;a class = "button" style= "visibility: visible;" href="./literature"&gt;Start Reading&lt;/a&gt;</noscript>
+          <Link href="./literature"><a className="button" >Start Reading</a></Link>
           <div className="button-pattern" />	
         </div>	
         <div className="pros-container">
@@ -53,7 +53,7 @@ export default function Home() {
           </div>
           <p className=" testo-credit medium-text"><span>Eden Collins</span></p>
         </div>
-        <a className="button recall-button" href="./literature">Read SAT Passages</a>
+        <Link href="./literature"><a className="button recall-button" >Start Reading</a></Link> 
         <p className="button-recall-disc">Get going, It's free</p>
       </main>	
       <footer></footer>

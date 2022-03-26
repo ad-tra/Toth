@@ -1,3 +1,4 @@
+import PassageContent from "./PassageContent"
 export default function Passage(){
     return (
         <div>
@@ -24,18 +25,7 @@ export default function Passage(){
         </div>
         <h2 className="loadTime"> Passage available in 5~10 seconds</h2>
       </section>
-      <article>
-        <section className="article-section">
-          <div className="line-num" />
-          <div className="article-main"> 
-          </div>
-        </section>
-        <div className="separateur" />
-        <section className="article-section">
-          <div className="line-num" />
-          <div className="article-main" />
-        </section>
-      </article>
+      <PassageContent />
       <div className="pagination">
         <div className="get-article">
           <a id="back" className="link"> Back</a>

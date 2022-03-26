@@ -7,6 +7,15 @@
 
 
 }
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 body{
 	/*overflow-x: hidden;*/
 	background: var(--white);
@@ -19,7 +28,22 @@ body{
   color: var(--gray);
   background: var(--blue);
 }
-@media (prefers-color-scheme: light) {
+
+    .dark{
+		--black: #E6E7E9 ;
+        --gray:#1A1D29;
+        --white: #252A3B;
+        --dark-gray: #2D334A;
+        --black: #E6E7E9 ;
+        --gray:hsl(216, 53%, 9%);
+        --white: hsl(217, 28%, 15%);
+        --dark-gray: hsl(219, 30%, 18%);
+		--dark-blue: #1E65C2;
+		--blue: #326BA1;
+    }
+
+
+
     body{
         --black: #231f20 ;
         --blue: #0E4A82;
@@ -28,20 +52,7 @@ body{
         --dark-blue:#093156 ;
         --white: #ffffff;
     }
-}
 
-@media (prefers-color-scheme: dark) {
-    body{
-        --black: #E6E7E9 ;
-        --gray:#1A1D29;
-        --white: #252A3B;
-        --dark-gray: #2D334A;
-        --black: #E6E7E9 ;
-        --gray:hsl(216, 53%, 9%);
-        --white: hsl(217, 28%, 15%);
-        --dark-gray: hsl(219, 30%, 18%);
-    }
-}
 
 
 #orange{
@@ -219,6 +230,7 @@ nav{
 	padding: 0;
 	margin: 0 0.2em;
 	white-space: nowrap;
+	border-bottom: 200px;
 }
 .dropdown .separateur{
 	background: repeating-linear-gradient( 90deg,transparent 0 2px, var(--blue) 2px 8px);
@@ -250,6 +262,10 @@ nav{
 
 .nav-links a:hover, .logo a:hover{
 	background-color: var(--dark-gray);
+}
+.dropdown button {
+	font-size: 1.7em;
+	padding-left: 0.2vw;
 }
 
 .background-pattern{
