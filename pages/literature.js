@@ -8,7 +8,7 @@ export default function Literature(){
             <title>SAT Literature Passages - TOTH</title>
             <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Passage />
+        <Passage topic = "literature"/>
         </>
     )
 }

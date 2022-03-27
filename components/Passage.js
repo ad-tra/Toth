@@ -1,6 +1,8 @@
 import PassageContent from "./PassageContent"
-export default function Passage(){
-    return (
+export default function Passage({topic}){
+    
+  
+  return (
         <div>
   <main id="app">
     <div className="container">
@@ -25,7 +27,7 @@ export default function Passage(){
         </div>
         <h2 className="loadTime"> Passage available in 5~10 seconds</h2>
       </section>
-      <PassageContent />
+      <PassageContent topic = {topic}/>
       <div className="pagination">
         <div className="get-article">
           <a id="back" className="link"> Back</a>
