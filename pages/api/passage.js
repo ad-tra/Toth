@@ -2,6 +2,10 @@ import axios from "axios"
 const { Readability } = require('@mozilla/readability');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
+import p1 from './p1.json'
+import p2 from './p2.json'
+import p3 from './p3.json'
+import p4 from './p4.json'
 
 const headers = {
     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -44,7 +48,9 @@ async function getArticle(hrefArr){
             content: [article.content.slice(0, article.content.length/2), article.content.slice(article.content.length/2)]
         };
         
-    }catch(err){console.log(err)}
+    }catch(err){
+        console.log(err)
+    }
 
    }
    return "l3asba twila"
@@ -68,19 +74,20 @@ export default async function handler(req, res) {
 
     switch (req.query.topic) {
         case "literature":
-            resultArticle = await getArticle(["https://quadrant.org.au/magazine/2022/01/warhol-the-void-beneath-the-emptiness"]);
+            resultArticle = p1
         break;
         case "science":
-            resultArticle = await getArticle(["https://www.smithsonianmag.com/smart-news/why-would-two-ordinary-people-steal-a-160-million-willem-de-kooning-painting-180979787/"]);
+            resultArticle = p2
         break;
         case "social-science":
-            resultArticle = await getArticle(["https://inference-review.com/article/the-nature-of-art"]);
+            resultArticle = p3
         break;
         case "history":
-            resultArticle = await getArticle("https://www.newstatesman.com/culture/books/2022/03/on-the-road-again-jack-kerouacs-contested-legacy");
+            resultArticle = p4
         break;
         default:
-            break;
+            throw new Error("query doesn't mach any profiles")
+    
     }
 
     res.setHeader('Content-Type', 'text/html');

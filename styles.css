@@ -563,7 +563,12 @@ html.is-animating .transition-fade {
 	color: var(--black);
 	padding: 0 1em;
 }
+.container::before{
+    content: attr(data-topic);
+    font-size: 1.5em;
+    font-family: 'rokkitt-bold';
 
+}
 #banner{
 	background-color: var(--gray);
 	border-right: 1.5em solid var(--black);
@@ -798,8 +803,13 @@ pointer-events: none
 
 
 .about-container{
-padding-left:12% ;
+	margin: 0 auto;
+	max-width: 800px;
+	padding: 5em 4% 2em 4%;
+	font-family: 'rokkitt';
+	font-size: 1.5em;
 }
-.about-container > * {
-	margin: revert;
+
+.about-container p{
+	padding-top:1em
 }

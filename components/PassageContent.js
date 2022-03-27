@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 export default function PassageContent({topic}) {
   const [content, setContent] = useState({})
   useEffect(async () => {
@@ -10,17 +10,20 @@ export default function PassageContent({topic}) {
       setContent(data)
       console.log(data);
     },[])  
-    const choices  = [1,10,11,21,22,31,32,41,42,52]; 
-    let i =  parseInt(Math.random()*choices.length)
+
+    const choicesStart  = [1,11,22,32,42]; 
+    const choicesEnd = [10,21,31,41,52]; 
+    let i = useRef(parseInt(Math.random()*choicesStart.length)).current 
     
     return (
     <article>
     <section className="article-section">
       <div className="line-num" />
       <div className="article-main">
-        <h1 class= "instructions">Questions {choices[i]}-{choices[i+1]} are based on the following passage.</h1>
+        <h1 class= "instructions">Questions {choicesStart[i]}-{choicesEnd[i]} are based on the following passage.</h1>
         <h3 class= "article-intro">This passage is from 
           <a class= "link" target = "_blank" rel="noopener" href = {content.siteHref}> {content.siteName !== null ? content.siteName :new URL(content.siteHref).host}</a> 
+          . {content.title}
         </h3> 
       <p dangerouslySetInnerHTML={{ __html: content.content !== undefined &&  content.content[0].join("") }}></p>
       </div>

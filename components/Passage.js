@@ -5,7 +5,7 @@ export default function Passage({topic}){
   return (
         <div>
   <main id="app">
-    <div className="container">
+    <div className="container" data-topic= {topic}>
       <header id="banner">
         <h1>1</h1><h1>
         </h1><h1>1</h1>
