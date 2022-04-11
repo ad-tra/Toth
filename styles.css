@@ -813,3 +813,7 @@ pointer-events: none
 .about-container p{
 	padding-top:1em
 }
+.about-container h2{
+	padding-top: 1em;
+	font-family: 'rokkitt-bold',Helvetica, sans-serif;
+}
